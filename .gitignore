@@ -1,0 +1,9 @@
+#Omitir carpeta .vscode
+*.vscode
+
+#Omitir carpeta .idea
+.idea
+
+#Omitir ejecutable
+*.exe
+
