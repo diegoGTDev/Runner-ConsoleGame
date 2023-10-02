@@ -1,6 +1,7 @@
 #pragma once
 
 void maximizarConsola();
+void ocultarCursor();
 void escribirAlgoritmos();
 void dibujar(char* w);
 void imprimir(int x, int y, char* w);

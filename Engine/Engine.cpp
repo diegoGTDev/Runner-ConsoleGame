@@ -14,14 +14,11 @@ NUBE * _nube;
 bool Engine::Init()
 {
     //Init
-
+    ocultarCursor();
     maximizarConsola();
-    system("title Screen Saver");
+    system("Runner UMG");
     system("cls");
-    system("color 3e");
-    Sleep(500);
     dibujarMargen(4,2, _MAX_X, _MAX_Y);
-    Sleep(500); 
     _roca = new ROCA(_MAX_X_MARCO, _MAX_Y_MARCO);
     _jugador = new JUGADOR (_MIN_X_MARCO+30, _MAX_Y_MARCO); 
     _nube = new NUBE(_MAX_X_MARCO-9, _MIN_Y_MARCO); 
@@ -42,7 +39,7 @@ void Engine::Release()
 
 void Engine::HandleEvents()
 {
-    _jugador->HandleEvents();
+    _jugador->HandleEvents(_roca);
     _roca->HandleEvents();
     _nube->HandleEvents();
 }

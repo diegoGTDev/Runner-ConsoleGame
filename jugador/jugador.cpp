@@ -17,7 +17,7 @@ void JUGADOR::Render(){
 
 }
 
-void JUGADOR::HandleEvents()
+void JUGADOR::HandleEvents(ROCA* roca)
 {
     if (_kbhit()){
         if (getch() == ' '){
@@ -28,6 +28,7 @@ void JUGADOR::HandleEvents()
         }
     }
     this->caer();
+    this->colision(*roca);
 }
 
 void JUGADOR::mover(){
@@ -72,6 +73,7 @@ void JUGADOR::saltar(){
 void JUGADOR::colision(struct ROCA &ROCA){
     
     if (x >= ROCA.getX() && x <= ROCA.getX() && y >= ROCA.getY() && y <= ROCA.getY()){
+        Sleep(2000);
         this->GameOver();
     }
 }

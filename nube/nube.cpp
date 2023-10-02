@@ -3,9 +3,9 @@
 #include<iostream>
 void NUBE::Render(){
      char* cloud[4] ={"   __   _",
-                         " _(  )_( )_",
-                         "(_   _    _)",
-                         "  (_) (__)"};
+                        " _(  )_( )_",
+                        "(_   _    _)",
+                        "  (_) (__)"};
     for (int i = 0; i < 4; i++) {
         gotoxy(x, y+i);
         std::cout<<cloud[i];

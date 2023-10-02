@@ -1,4 +1,5 @@
 #pragma once
+class ROCA;
 class JUGADOR{
     int x, y;
     int dy;
@@ -12,7 +13,7 @@ class JUGADOR{
             y = _y;
             NIVEL_TIERRA = _y;
         }
-        void HandleEvents();
+        void HandleEvents(ROCA* roca);
         void Render();
         void mover();
         void saltar();

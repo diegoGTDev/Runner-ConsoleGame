@@ -105,3 +105,10 @@ int* obtenerMedidasConsola(){
     return new int[2]{consoleWidth, consoleHeight};
 }
 
+void ocultarCursor(){
+    HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
+    CONSOLE_CURSOR_INFO CursoInfo;
+    CursoInfo.dwSize = 1;
+    CursoInfo.bVisible = FALSE;
+    SetConsoleCursorInfo(hConsole, &CursoInfo);
+}

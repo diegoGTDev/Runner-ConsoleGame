@@ -4,7 +4,7 @@
 #include "roca.h"
 void ROCA::Render(){
     gotoxy(x, y);
-    printf("%c%c", 219, 220);
+    printf("\033[31m%c%c\033[0m", 219, 220);
 
 }
 
