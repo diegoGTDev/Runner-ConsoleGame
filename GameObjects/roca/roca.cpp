@@ -4,25 +4,22 @@
 #include "roca.h"
 void ROCA::Render(){
     gotoxy(x, y);
+    std::cout<<"   ";
+    gotoxy(x, y);
     printf("\033[31m%c%c\033[0m", 219, 220);
 
 }
 
 void ROCA::Update()
 {
-    this->mover();
+    this->x--;
 }
 
 void ROCA::HandleEvents()
 {
     estaEnLimite();
 }
-void ROCA::mover(){
-    gotoxy(x, y);
-    std::cout<<"   ";
-    x--;
-    Render();
-}
+
 
 int ROCA::getX(){
     return x;

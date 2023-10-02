@@ -2,6 +2,10 @@
 #include "nube.h"
 #include<iostream>
 void NUBE::Render(){
+    for (int i = 0; i < 4; i++) {
+        gotoxy(x,y+i);
+        std::cout<<"             ";
+    }
      char* cloud[4] ={"   __   _",
                         " _(  )_( )_",
                         "(_   _    _)",
@@ -19,18 +23,9 @@ void NUBE::HandleEvents()
 
 void NUBE::Update()
 {
-    mover();
+    this->x--;
 }
 
-void NUBE::mover(){
-
-    for (int i = 0; i < 4; i++) {
-        gotoxy(x,y+i);
-        std::cout<<"            ";
-    }
-    x--;
-    Render();
-}
 
 void NUBE::estaEnLimite(){
     const int limite = MIN_X_MARCO;

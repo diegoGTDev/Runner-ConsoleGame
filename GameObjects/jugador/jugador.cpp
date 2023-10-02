@@ -22,10 +22,14 @@ void JUGADOR::HandleEvents(char tecla, ROCA* roca)
     if (tecla == 32){
         this->saltar();
     }
-    this->colision(*roca);
+    this->colisionado = this->colision(*roca);
 }
 void JUGADOR::Update(){
     this->caer();
+    this->setPunteo(this->getPunteo()+1);
+    if (this->colisionado == 1){
+        this->GameOver();
+    }
 }
 void JUGADOR::mover(){
     for (int k = 0; k<2; k++){
@@ -66,12 +70,13 @@ void JUGADOR::saltar(){
         estaEnElAire = true;
     }
 }
-void JUGADOR::colision(struct ROCA &ROCA){
+int JUGADOR::colision(struct ROCA &ROCA){
     
     if (x >= ROCA.getX() && x <= ROCA.getX() && y >= ROCA.getY() && y <= ROCA.getY()){
         Sleep(2000);
-        this->GameOver();
+        return 1;
     }
+    return 0;
 }
 
 void JUGADOR::GameOver()
@@ -79,7 +84,6 @@ void JUGADOR::GameOver()
     int x = MAX_X_MARCO;
     int y = MAX_Y_MARCO;
     system("cls");
-    system("color 4e");
     gotoxy(x/2,y/2);
     std::cout << "GAME OVER";
     std::cout << " Punteo: "<<this->getPunteo();

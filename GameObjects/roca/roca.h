@@ -22,7 +22,6 @@ class ROCA{
     private:
       int x, y;
       int inicialX, inicialY;
-      void mover();
       void estaEnLimite();
       
 

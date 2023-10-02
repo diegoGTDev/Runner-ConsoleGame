@@ -19,8 +19,10 @@ class JUGADOR{
         void mover();
         void saltar();
         void caer();
-        void colision(struct ROCA &ROCA);
+        int colision(struct ROCA &ROCA);
         void GameOver();
         int getPunteo();
         int setPunteo(int punteo);
+    private:
+        int colisionado = 0;
 };

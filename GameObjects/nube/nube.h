@@ -12,6 +12,5 @@ class NUBE{
         void Render();
         void HandleEvents();
         void Update();
-        void mover();
         void estaEnLimite();
 };
