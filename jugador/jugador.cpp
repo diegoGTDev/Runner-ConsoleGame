@@ -1,14 +1,13 @@
 #include "jugador.h"
 #include "../roca/roca.h"
-#include "../General/gotoxy.h"
+#include "../Console/functions.h"
 #include <iostream>
-#include "../Game/Game.h"
 #include "../General/constantes.h"
 #include <windows.h>
 #include<conio.h>
 
 
-void JUGADOR::dibujar(){
+void JUGADOR::Render(){
     char* jugador[2] = {"|","O"};
     for (int j = 0; j<2; j++){
         gotoxy(x,y-j);
@@ -18,12 +17,25 @@ void JUGADOR::dibujar(){
 
 }
 
+void JUGADOR::HandleEvents()
+{
+    if (_kbhit()){
+        if (getch() == ' '){
+        this->saltar();
+        }
+    else if (getch() == 'a'){
+        this->GameOver();
+        }
+    }
+    this->caer();
+}
+
 void JUGADOR::mover(){
     for (int k = 0; k<2; k++){
         std::cout << " ";
     }
     x++;
-    dibujar();
+    Render();
 }
 
 void JUGADOR::caer(){
@@ -34,7 +46,7 @@ void JUGADOR::caer(){
             std::cout << " ";
         }
         y += dy;
-        dibujar();
+        Render();
         dy += 1;
         if (y >= NIVEL_TIERRA){
             y = NIVEL_TIERRA;
@@ -44,7 +56,7 @@ void JUGADOR::caer(){
             gotoxy(x,y-k);
             std::cout << " ";
         }         
-            dibujar();
+            Render();
         }
     }
 

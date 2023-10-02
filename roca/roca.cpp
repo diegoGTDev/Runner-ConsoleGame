@@ -1,21 +1,27 @@
-#include "../Game/Game.h"
-#include "../General/gotoxy.h"
-#include "../General/gotoxy.h"
 #include "./roca.h"
 #include "conio.h"
 #include<iostream>
 #include "roca.h"
-void ROCA::dibujar(){
+void ROCA::Render(){
     gotoxy(x, y);
     printf("%c%c", 219, 220);
 
 }
 
+void ROCA::Update()
+{
+    this->mover();
+}
+
+void ROCA::HandleEvents()
+{
+    estaEnLimite();
+}
 void ROCA::mover(){
     gotoxy(x, y);
     std::cout<<"   ";
     x--;
-    dibujar();
+    Render();
 }
 
 int ROCA::getX(){

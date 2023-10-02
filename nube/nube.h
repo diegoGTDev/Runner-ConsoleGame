@@ -1,4 +1,4 @@
-#include "../General/gotoxy.h"
+#include "../Console/functions.h"
 #include "../General/constantes.h"
 class NUBE{
     int x, y;
@@ -9,7 +9,9 @@ class NUBE{
 
     public:
         NUBE(int _x, int _y) : x(_x) , y(_y), inicialY(_y) {}
-        void dibujar();
+        void Render();
+        void HandleEvents();
+        void Update();
         void mover();
         void estaEnLimite();
 };

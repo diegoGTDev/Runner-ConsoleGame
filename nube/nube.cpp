@@ -1,9 +1,7 @@
-#include "../Game/Game.h"
-#include "../General/gotoxy.h"
 #include "../General/constantes.h"
 #include "nube.h"
 #include<iostream>
-void NUBE::dibujar(){
+void NUBE::Render(){
      char* cloud[4] ={"   __   _",
                          " _(  )_( )_",
                          "(_   _    _)",
@@ -14,6 +12,15 @@ void NUBE::dibujar(){
     }
 }
 
+void NUBE::HandleEvents()
+{
+    estaEnLimite();
+}
+
+void NUBE::Update()
+{
+    mover();
+}
 
 void NUBE::mover(){
 
@@ -22,7 +29,7 @@ void NUBE::mover(){
         std::cout<<"            ";
     }
     x--;
-    dibujar();
+    Render();
 }
 
 void NUBE::estaEnLimite(){

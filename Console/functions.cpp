@@ -1,15 +1,15 @@
-#include "Game.h"
+#include "functions.h"
 #include <iostream>
 #include "../General/constantes.h"
-#include "../General/gotoxy.h"
+#include<windows.h>
 using namespace std;
 
-void Game::maximizarConsola(){
+void maximizarConsola(){
     HWND console = GetConsoleWindow();
     ShowWindow(console, SW_MAXIMIZE);
 }
 
-void Game::escribirAlgoritmos(){
+void escribirAlgoritmos(){
     const char* palabra[11] = {
         "          $$\\                               $$\\   $$\\                                ",
 "          $$ |                              \\__|  $$ |         ",  
@@ -39,8 +39,8 @@ void Game::escribirAlgoritmos(){
 
 
 //Funcion para imprimir el margen
-void Game::imprimir(int x, int y, char* w){
-    const int _TIME = 0.999;
+void imprimir(int x, int y, char w){
+    const int _TIME = 0;
     gotoxy(x,y);
     //cout<<w;
     //Print ascii character 177
@@ -49,27 +49,59 @@ void Game::imprimir(int x, int y, char* w){
 }
 
 //Dibujamos un margen al rededor de la consola
-void Game::dibujarMargen(int x,int y, int max_x, int max_y){
-    char* c = "\100";
+void dibujarMargen(int x,int y, int max_x, int max_y){
+    max_x -= 8;
+    max_y -= 8;
+    char c = 223;
+
     for(int i = 0; i < max_x; i++){
-        imprimir(x,y, c);
+        imprimir(x,y, 205);
         x++;
     }
+    
     for(int i = 0; i < max_y; i++){
-        imprimir(x,y, c);
+        imprimir(x,y+1, 186);
         y++;
     }
+    
     for(int i = 0; i < max_x; i++){
-        imprimir(x,y, c);
+        imprimir(x,y, 205);
         x--;
     }
     for(int i = 0; i < max_y; i++){
-        imprimir(x,y, c);
+        imprimir(x,y, 186);
         y--;
     }
-
-    if (x <= 4 && y <= 2){
-        dibujarMargen(x+1,y+1,max_x-2, max_y-2);
-    }
+    imprimir(4,2, 201);
+    imprimir(max_x+4,y, 187);
+    imprimir(max_x+4,max_y+2, 188);
+    imprimir(4,max_y+2, 200);
+    // if (x <= 4 && y <= 2){
+    //     dibujarMargen(x+1,y+1,max_x-2, max_y-2);
+    // }
     return;
 }
+
+
+void gotoxy(int x,int y)
+{ HANDLE hcon;
+
+    hcon = GetStdHandle(STD_OUTPUT_HANDLE);
+
+    COORD dwPos; dwPos.X = x; dwPos.Y= y;
+    SetConsoleCursorPosition(hcon,dwPos);
+
+}
+
+int* obtenerMedidasConsola(){
+    HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
+
+    CONSOLE_SCREEN_BUFFER_INFO csbi;
+    GetConsoleScreenBufferInfo(hConsole, &csbi);
+
+    int consoleWidth = csbi.srWindow.Right - csbi.srWindow.Left ;
+    int consoleHeight = csbi.srWindow.Bottom - csbi.srWindow.Top ;
+
+    return new int[2]{consoleWidth, consoleHeight};
+}
+

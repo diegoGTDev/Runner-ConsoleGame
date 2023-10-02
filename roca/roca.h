@@ -1,4 +1,4 @@
-#include "../General/gotoxy.h"
+#include "../Console/functions.h"
 #include "../General/constantes.h"
 #ifndef ROCA_H
 #define ROCA_H
@@ -12,14 +12,18 @@ class ROCA{
       inicialY = _y;
 
     }
-    void dibujar();
-    void mover();
-    void estaEnLimite();
+    void Render();
+    void Update();
+    void HandleEvents();
+
+
     int getX();
     int getY();
     private:
       int x, y;
       int inicialX, inicialY;
+      void mover();
+      void estaEnLimite();
       
 
 };

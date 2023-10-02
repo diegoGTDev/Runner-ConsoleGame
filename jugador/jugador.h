@@ -1,4 +1,4 @@
-
+#pragma once
 class JUGADOR{
     int x, y;
     int dy;
@@ -12,7 +12,8 @@ class JUGADOR{
             y = _y;
             NIVEL_TIERRA = _y;
         }
-        void dibujar();
+        void HandleEvents();
+        void Render();
         void mover();
         void saltar();
         void caer();
