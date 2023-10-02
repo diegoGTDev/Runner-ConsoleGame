@@ -7,3 +7,9 @@
 #Omitir ejecutable
 *.exe
 
+
+#omitir archivo .py
+*.py
+
+#omitir archivo rutas
+rutas.txt
