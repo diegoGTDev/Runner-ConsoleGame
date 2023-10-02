@@ -3,9 +3,9 @@
 #include "Console/functions.h"
 #include "General/constantes.h"
 #include<stdlib.h>
-#include "roca/roca.h"
-#include "nube/nube.h"
-#include "jugador/jugador.h"
+#include "GameObjects/roca/roca.h"
+#include "GameObjects/nube/nube.h"
+#include "GameObjects/jugador/jugador.h"
 #include <windows.h>
 #include"Engine/Engine.h"
 #include<chrono>

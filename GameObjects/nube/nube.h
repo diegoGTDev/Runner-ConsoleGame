@@ -1,5 +1,5 @@
-#include "../Console/functions.h"
-#include "../General/constantes.h"
+#include "../../Console/functions.h"
+#include "../../General/constantes.h"
 class NUBE{
     int x, y;
     int max_x_marco = MAX_X_MARCO;

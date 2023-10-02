@@ -13,8 +13,9 @@ class JUGADOR{
             y = _y;
             NIVEL_TIERRA = _y;
         }
-        void HandleEvents(ROCA* roca);
+        void HandleEvents(char tecla, ROCA* roca);
         void Render();
+        void Update();
         void mover();
         void saltar();
         void caer();

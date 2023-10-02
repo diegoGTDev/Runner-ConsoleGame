@@ -1,8 +1,8 @@
 #include "jugador.h"
 #include "../roca/roca.h"
-#include "../Console/functions.h"
+#include "../../Console/functions.h"
 #include <iostream>
-#include "../General/constantes.h"
+#include "../../General/constantes.h"
 #include <windows.h>
 #include<conio.h>
 
@@ -17,20 +17,16 @@ void JUGADOR::Render(){
 
 }
 
-void JUGADOR::HandleEvents(ROCA* roca)
+void JUGADOR::HandleEvents(char tecla, ROCA* roca)
 {
-    if (_kbhit()){
-        if (getch() == ' '){
+    if (tecla == 32){
         this->saltar();
-        }
-    else if (getch() == 'a'){
-        this->GameOver();
-        }
     }
-    this->caer();
     this->colision(*roca);
 }
-
+void JUGADOR::Update(){
+    this->caer();
+}
 void JUGADOR::mover(){
     for (int k = 0; k<2; k++){
         std::cout << " ";

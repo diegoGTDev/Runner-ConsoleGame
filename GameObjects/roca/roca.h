@@ -1,5 +1,5 @@
-#include "../Console/functions.h"
-#include "../General/constantes.h"
+#include "../../Console/functions.h"
+#include "../../General/constantes.h"
 #ifndef ROCA_H
 #define ROCA_H
 class ROCA{ 

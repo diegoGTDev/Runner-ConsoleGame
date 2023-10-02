@@ -1,4 +1,4 @@
-#include "../General/constantes.h"
+#include "../../General/constantes.h"
 #include "nube.h"
 #include<iostream>
 void NUBE::Render(){

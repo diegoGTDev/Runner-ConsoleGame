@@ -1,10 +1,10 @@
 #include "Engine.h"
-#include "../jugador/jugador.h"
+#include "../GameObjects/jugador/jugador.h"
 #include<windows.h>
 #include<iostream>
 #include<conio.h>
-#include"../roca/roca.h"
-#include"../nube/nube.h"
+#include"../GameObjects/roca/roca.h"
+#include"../GameObjects/nube/nube.h"
 #include"../Console/functions.h"
 using namespace std;
 Engine* Engine::_instance = nullptr;
@@ -29,6 +29,7 @@ void Engine::Update(double elapsedSeconds)
 {
     _roca->Update();   
     _nube->Update();
+    _jugador->Update();
 }
 
 void Engine::Release()
@@ -39,7 +40,14 @@ void Engine::Release()
 
 void Engine::HandleEvents()
 {
-    _jugador->HandleEvents(_roca);
+    char tecla = 0;
+    if (_kbhit()){
+        tecla = getch();
+    }
+    if (tecla == 27){
+        this->_isRunning = false;
+    }
+    _jugador->HandleEvents(tecla, _roca);
     _roca->HandleEvents();
     _nube->HandleEvents();
 }
