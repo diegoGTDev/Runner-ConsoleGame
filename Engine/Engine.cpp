@@ -6,6 +6,7 @@
 #include"../GameObjects/roca/roca.h"
 #include"../GameObjects/nube/nube.h"
 #include"../Console/functions.h"
+#include"../Console/UserInterface/UI.h"
 using namespace std;
 Engine* Engine::_instance = nullptr;
 JUGADOR *_jugador;
@@ -18,10 +19,11 @@ bool Engine::Init()
     maximizarConsola();
     system("Runner UMG");
     system("cls");
-    dibujarMargen(4,2, _MAX_X, _MAX_Y);
+    UI::GetInstance()->drawFrame(4, 2, _MAX_X, _MAX_Y);
     _roca = new ROCA(_MAX_X_MARCO, _MAX_Y_MARCO);
     _jugador = new JUGADOR (_MIN_X_MARCO+30, _MAX_Y_MARCO); 
     _nube = new NUBE(_MAX_X_MARCO-9, _MIN_Y_MARCO); 
+    
     return _isRunning=true;
 }
 
@@ -30,6 +32,7 @@ void Engine::Update(double elapsedSeconds)
     _roca->Update();   
     _nube->Update();
     _jugador->Update();
+    UI::GetInstance()->drawScore(_jugador->getPunteo());
 }
 
 void Engine::Release()

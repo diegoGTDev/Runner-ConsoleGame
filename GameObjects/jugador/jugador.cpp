@@ -26,10 +26,10 @@ void JUGADOR::HandleEvents(char tecla, ROCA* roca)
 }
 void JUGADOR::Update(){
     this->caer();
-    this->setPunteo(this->getPunteo()+1);
     if (this->colisionado == 1){
         this->GameOver();
     }
+    this->setPunteo(this->getPunteo()+1);
 }
 void JUGADOR::mover(){
     for (int k = 0; k<2; k++){
