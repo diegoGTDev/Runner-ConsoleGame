@@ -13,13 +13,14 @@ class ROCA{
 
     }
     void Render();
-    void Update();
+    void Update(double elapsedSeconds);
     void HandleEvents();
 
 
     int getX();
     int getY();
     private:
+      int velocity = 3;
       int x, y;
       int inicialX, inicialY;
       void estaEnLimite();

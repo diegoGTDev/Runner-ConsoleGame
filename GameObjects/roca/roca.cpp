@@ -4,15 +4,19 @@
 #include "roca.h"
 void ROCA::Render(){
     gotoxy(x, y);
-    std::cout<<"   ";
+    std::cout<<"    ";
     gotoxy(x, y);
     printf("\033[31m%c%c\033[0m", 219, 220);
 
 }
 
-void ROCA::Update()
+void ROCA::Update(double elapsedSeconds)
 {
-    this->x--;
+    gotoxy(30, 4);
+    std::cout<<velocity * elapsedSeconds * 100;
+    gotoxy(4, 30);
+    std::cout<<"           ";
+    this->x -= 2;
 }
 
 void ROCA::HandleEvents()

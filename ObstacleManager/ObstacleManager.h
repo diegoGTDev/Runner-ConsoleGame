@@ -1,5 +1,6 @@
 #pragma once
 
+/// ObstacleManager class is in charge about the obstacles in the game, it will create, update and delete them.
 class ObstacleManager{
     private:
         static ObstacleManager* _instance;

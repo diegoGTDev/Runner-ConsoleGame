@@ -33,7 +33,7 @@ bool Engine::Init()
 
 void Engine::Update(double elapsedSeconds)
 {
-    _roca->Update();   
+    _roca->Update(elapsedSeconds);   
     _nube->Update();
     _jugador->Update(_profile);
     UI::GetInstance()->drawScore(_jugador->getPunteo());
