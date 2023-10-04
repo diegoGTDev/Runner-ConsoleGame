@@ -5,7 +5,9 @@
 #include "../../General/constantes.h"
 #include <windows.h>
 #include<conio.h>
-
+#include"../../Console/UserInterface/UI.h"
+#include"../../Profile_System/ProfileRepository/ProfileRepository.h"
+#include"../../Profile_System/Profile/Profile.h"
 
 void JUGADOR::Render(){
     char* jugador[2] = {"|","O"};
@@ -24,10 +26,17 @@ void JUGADOR::HandleEvents(char tecla, ROCA* roca)
     }
     this->colisionado = this->colision(*roca);
 }
-void JUGADOR::Update(){
+void JUGADOR::Update(Profile profile){
     this->caer();
     if (this->colisionado == 1){
-        this->GameOver();
+        UI::GetInstance()->drawGameOver(this->getPunteo(), profile.getName());
+        gotoxy(7,7);
+        std::cout<<profile.getName();
+        Sleep(500);
+        profile.setScore(this->getPunteo());
+        ProfileRepository::GetInstance()->modifyProfile(profile);
+        UI::GetInstance()->drawHighestScores();
+        exit(0);
     }
     this->setPunteo(this->getPunteo()+1);
 }
@@ -73,7 +82,6 @@ void JUGADOR::saltar(){
 int JUGADOR::colision(struct ROCA &ROCA){
     
     if (x >= ROCA.getX() && x <= ROCA.getX() && y >= ROCA.getY() && y <= ROCA.getY()){
-        Sleep(2000);
         return 1;
     }
     return 0;
@@ -81,14 +89,6 @@ int JUGADOR::colision(struct ROCA &ROCA){
 
 void JUGADOR::GameOver()
 {
-    int x = MAX_X_MARCO;
-    int y = MAX_Y_MARCO;
-    system("cls");
-    gotoxy(x/2,y/2);
-    std::cout << "GAME OVER";
-    std::cout << " Punteo: "<<this->getPunteo();
-    Sleep(1000);
-    exit(0);
 }
 
 int JUGADOR::getPunteo(){

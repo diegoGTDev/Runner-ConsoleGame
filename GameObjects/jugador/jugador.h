@@ -1,5 +1,6 @@
 #pragma once
 class ROCA;
+class Profile;
 class JUGADOR{
     int x, y;
     int dy;
@@ -15,7 +16,7 @@ class JUGADOR{
         }
         void HandleEvents(char tecla, ROCA* roca);
         void Render();
-        void Update();
+        void Update(Profile profile);
         void mover();
         void saltar();
         void caer();

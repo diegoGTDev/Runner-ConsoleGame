@@ -2,6 +2,7 @@
 
 #define ENGINE_H
 #include"../General/constantes.h"
+#include"../Profile_System/Profile/Profile.h"
 #define CONSOLE_WIDTH MAX_X
 #define CONSOLE_HEIGHT MAX_Y
 #define TIME 15
@@ -21,7 +22,7 @@ private:
     Engine(){};
     static Engine* _instance;
     bool _isRunning;
-    static Engine* m_instance;
+    Profile _profile;
     //---
     const int _MAX_X = MAX_X;
     const int _MAX_Y = MAX_Y;

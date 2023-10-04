@@ -24,7 +24,6 @@ int main() {
         Engine::GetInstance()->Render();
         lastTime = current; //Tiempo final
     }
-
     Engine::GetInstance()->Release();
     return 0;
 

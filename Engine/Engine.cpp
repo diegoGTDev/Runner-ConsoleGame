@@ -7,6 +7,7 @@
 #include"../GameObjects/nube/nube.h"
 #include"../Console/functions.h"
 #include"../Console/UserInterface/UI.h"
+#include"../Profile_System/Profile/Profile.h"
 using namespace std;
 Engine* Engine::_instance = nullptr;
 JUGADOR *_jugador;
@@ -19,6 +20,9 @@ bool Engine::Init()
     maximizarConsola();
     system("Runner UMG");
     system("cls");
+    _profile = UI::GetInstance()->drawProfileRegister();
+    system("cls");
+    UI::GetInstance()->drawPlayerName(_profile);
     UI::GetInstance()->drawFrame(4, 2, _MAX_X, _MAX_Y);
     _roca = new ROCA(_MAX_X_MARCO, _MAX_Y_MARCO);
     _jugador = new JUGADOR (_MIN_X_MARCO+30, _MAX_Y_MARCO); 
@@ -31,7 +35,7 @@ void Engine::Update(double elapsedSeconds)
 {
     _roca->Update();   
     _nube->Update();
-    _jugador->Update();
+    _jugador->Update(_profile);
     UI::GetInstance()->drawScore(_jugador->getPunteo());
 }
 
