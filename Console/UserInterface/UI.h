@@ -1,5 +1,6 @@
 #pragma once
 #include"../../Profile_System/Profile/Profile.h"
+#include "../../General/constantes.h"
 class UI{
     public:
     static UI* GetInstance(){
@@ -17,4 +18,8 @@ class UI{
     private:
         UI(){};
         static UI * _instance;
+        int _max_x = MAX_X;
+        int _max_y = MAX_Y;
+        int _max_x_marco = MAX_X_MARCO;
+        int _max_y_marco = MAX_Y_MARCO;
 };

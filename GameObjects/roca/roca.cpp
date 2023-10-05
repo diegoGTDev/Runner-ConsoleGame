@@ -2,21 +2,24 @@
 #include "conio.h"
 #include<iostream>
 #include "roca.h"
+#include<cmath>
+//Fordebug
+#include<windows.h>
 void ROCA::Render(){
     gotoxy(x, y);
     std::cout<<"    ";
     gotoxy(x, y);
     printf("\033[31m%c%c\033[0m", 219, 220);
+    gotoxy(4, 0);
+    std::cout<<"x: "<<x<<" y: "<<y<<"       ";
+    gotoxy(4, 0);
 
 }
 
 void ROCA::Update(double elapsedSeconds)
 {
-    gotoxy(30, 4);
-    std::cout<<velocity * elapsedSeconds * 100;
-    gotoxy(4, 30);
-    std::cout<<"           ";
-    this->x -= 2;
+
+    x -= velocity;   
 }
 
 void ROCA::HandleEvents()
@@ -35,13 +38,10 @@ int ROCA::getY()
 }
 void ROCA::estaEnLimite(){
     const int limite = MIN_X_MARCO;
-    if (x >=limite && x <= limite){
+    if (x+velocity >=limite && x<= limite){
         gotoxy(x, y);
-        std::cout<<"  ";
-        if (x== limite){
-
-            x = inicialX;
-        }
+        std::cout<<"   ";
+        x = inicialX;
     }
 }
 

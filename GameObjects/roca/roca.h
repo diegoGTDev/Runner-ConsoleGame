@@ -20,7 +20,7 @@ class ROCA{
     int getX();
     int getY();
     private:
-      int velocity = 3;
+      int velocity = 2;
       int x, y;
       int inicialX, inicialY;
       void estaEnLimite();

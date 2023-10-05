@@ -16,6 +16,8 @@ void JUGADOR::Render(){
         std::cout << jugador[j];
         
     }
+    gotoxy(30, 0);
+    std::cout<<"x: "<<x<<" y: "<<y<<"       ";
 
 }
 
@@ -30,9 +32,10 @@ void JUGADOR::Update(Profile profile){
     this->caer();
     if (this->colisionado == 1){
         UI::GetInstance()->drawGameOver(this->getPunteo(), profile.getName());
-        gotoxy(7,7);
-        std::cout<<profile.getName();
-        Sleep(500);
+        //*Debug
+        // gotoxy(7,7);
+        // std::cout<<profile.getName();
+        // Sleep(500);
         profile.setScore(this->getPunteo());
         ProfileRepository::GetInstance()->modifyProfile(profile);
         UI::GetInstance()->drawHighestScores();
@@ -41,11 +44,7 @@ void JUGADOR::Update(Profile profile){
     this->setPunteo(this->getPunteo()+1);
 }
 void JUGADOR::mover(){
-    for (int k = 0; k<2; k++){
-        std::cout << " ";
-    }
     x++;
-    Render();
 }
 
 void JUGADOR::caer(){
@@ -81,7 +80,7 @@ void JUGADOR::saltar(){
 }
 int JUGADOR::colision(struct ROCA &ROCA){
     
-    if (x >= ROCA.getX() && x <= ROCA.getX() && y >= ROCA.getY() && y <= ROCA.getY()){
+    if (x>= ROCA.getX() && x <= ROCA.getX() && y >= ROCA.getY() && y <= ROCA.getY()){
         return 1;
     }
     return 0;

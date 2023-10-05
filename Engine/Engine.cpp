@@ -20,10 +20,15 @@ bool Engine::Init()
     maximizarConsola();
     system("Runner UMG");
     system("cls");
+    UI::GetInstance()->drawMenu();
     _profile = UI::GetInstance()->drawProfileRegister();
     system("cls");
-    UI::GetInstance()->drawPlayerName(_profile);
     UI::GetInstance()->drawFrame(4, 2, _MAX_X, _MAX_Y);
+    UI::GetInstance()->drawPlayerName(_profile);
+    //*For debug
+    // _profile.setName("Jugador");
+    // _profile.setScore(1000);
+    //**End for debug
     _roca = new ROCA(_MAX_X_MARCO, _MAX_Y_MARCO);
     _jugador = new JUGADOR (_MIN_X_MARCO+30, _MAX_Y_MARCO); 
     _nube = new NUBE(_MAX_X_MARCO-9, _MIN_Y_MARCO); 

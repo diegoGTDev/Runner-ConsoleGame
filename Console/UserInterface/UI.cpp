@@ -1,7 +1,6 @@
 #include "UI.h"
 #include <iostream>
 #include "../functions.h"
-#include "../../General/constantes.h"
 #include<string>
 #include<windows.h>
 #include<conio.h>
@@ -40,6 +39,55 @@ void UI::drawFrame(int x, int y, int max_x, int max_y)
     //     dibujarMargen(x+1,y+1,max_x-2, max_y-2);
     // }
     return;
+}
+
+void UI::drawMenu()
+{
+    start:
+    system("cls");
+    drawFrame(4,2,_max_x,_max_y);
+    fflush(stdin);
+    int option = 0;
+    gotoxy(_max_x_marco/2, _max_y_marco/2);
+    cout<<"Runner Game";
+    gotoxy(_max_x_marco/2, _max_y_marco/2+1);
+    cout<<"[1] Jugar ";
+    gotoxy(_max_x_marco/2, _max_y_marco/2+2);
+    cout<<"[2] Ver punteos";
+    gotoxy(_max_x_marco/2, _max_y_marco/2+3);
+    cout<<"[3] Instrucciones";
+    gotoxy(_max_x_marco/2, _max_y_marco/2+4);
+    cout<<"[4] Salir";
+    gotoxy(_max_x_marco/2, _max_y_marco/2+5);
+    cout<<"Ingrese una opcion: ";cin>>option;
+    fflush(stdin);
+    system("cls");
+    drawFrame(4,2,_max_x,_max_y);
+    switch (option)
+    {
+    case 1:
+        return;
+    case 2:
+        drawHighestScores();
+        break;
+    case 3: 
+        gotoxy(_max_x_marco/2, _max_y_marco/2);
+        cout<<"Las instrucciones del juego son las siguientes";
+        gotoxy(_max_x_marco/2, _max_y_marco/2+1);
+        cout<<"Presione la tecla 'SPACE' para saltar y esquivar los obstaculos.";
+        gotoxy(_max_x_marco/2, _max_y_marco/2+2);
+        cout<<"Si el jugador choca contra un obstaculo, pierde.";
+        gotoxy(_max_x_marco/2, _max_y_marco/2+3);
+        cout<<"Presione la tecla 'ESC' para salir del juego.";
+        break;
+    case 4:
+        exit(0);
+    }
+    gotoxy(_max_x_marco/2-5,_max_y_marco/2+6);
+    std::cout << "Presione ENTER para continuar";
+    getch();
+    goto start;
+
 }
 
 void UI::drawGameOver(int score, char *name)
@@ -85,7 +133,6 @@ Profile UI::drawProfileRegister(){
 }
 
 void UI::drawHighestScores(){
-    system("cls");
     int x = MAX_X_MARCO;
     int y = MAX_Y_MARCO;
     vector<Profile> profiles = ProfileRepository::GetInstance()->getProfiles();
@@ -115,7 +162,4 @@ void UI::drawHighestScores(){
             break;
         }
     }
-    gotoxy(x/2-5,y/2+6);
-    std::cout << "Presione ENTER para continuar";
-    getch();
 }
