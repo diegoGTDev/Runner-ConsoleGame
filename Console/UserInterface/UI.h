@@ -13,6 +13,8 @@ class UI{
         void drawScore(int score);
         void drawStartMenu();
         void drawHighestScores();
+        void cleanAndDrawFrame();
+        int drawEndMenu();
         Profile drawProfileRegister();
     
     private:

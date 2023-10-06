@@ -28,20 +28,11 @@ void JUGADOR::HandleEvents(char tecla, ROCA* roca)
     }
     this->colisionado = this->colision(*roca);
 }
-void JUGADOR::Update(Profile profile){
+void JUGADOR::Update(Profile& profile){
     this->caer();
-    if (this->colisionado == 1){
-        UI::GetInstance()->drawGameOver(this->getPunteo(), profile.getName());
-        //*Debug
-        // gotoxy(7,7);
-        // std::cout<<profile.getName();
-        // Sleep(500);
-        profile.setScore(this->getPunteo());
-        ProfileRepository::GetInstance()->modifyProfile(profile);
-        UI::GetInstance()->drawHighestScores();
-        exit(0);
-    }
     this->setPunteo(this->getPunteo()+1);
+    profile.setScore(this->getPunteo());
+
 }
 void JUGADOR::mover(){
     x++;
@@ -55,7 +46,7 @@ void JUGADOR::caer(){
             std::cout << " ";
         }
         y += dy;
-        Render();
+        //Render();
         dy += 1;
         if (y >= NIVEL_TIERRA){
             y = NIVEL_TIERRA;

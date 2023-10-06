@@ -8,6 +8,7 @@
 #include"../Console/functions.h"
 #include"../Console/UserInterface/UI.h"
 #include"../Profile_System/Profile/Profile.h"
+#include"../Profile_System/ProfileRepository/ProfileRepository.h"
 using namespace std;
 Engine* Engine::_instance = nullptr;
 JUGADOR *_jugador;
@@ -29,19 +30,20 @@ bool Engine::Init()
     // _profile.setName("Jugador");
     // _profile.setScore(1000);
     //**End for debug
-    _roca = new ROCA(_MAX_X_MARCO, _MAX_Y_MARCO);
-    _jugador = new JUGADOR (_MIN_X_MARCO+30, _MAX_Y_MARCO); 
+    int xPosPlayer = (isOdd(_MAX_X_MARCO-1)) ? _MIN_X_MARCO + 29  : _MIN_X_MARCO + 30;
+    _roca = new ROCA(_MAX_X_MARCO-1, _MAX_Y_MARCO);
+    _jugador = new JUGADOR (xPosPlayer, _MAX_Y_MARCO); 
     _nube = new NUBE(_MAX_X_MARCO-9, _MIN_Y_MARCO); 
-    
     return _isRunning=true;
 }
 
 void Engine::Update(double elapsedSeconds)
 {
+    UI::GetInstance()->drawScore(_profile.getScore());
     _roca->Update(elapsedSeconds);   
     _nube->Update();
     _jugador->Update(_profile);
-    UI::GetInstance()->drawScore(_jugador->getPunteo());
+
 }
 
 void Engine::Release()
@@ -59,9 +61,17 @@ void Engine::HandleEvents()
     if (tecla == 27){
         this->_isRunning = false;
     }
+
     _jugador->HandleEvents(tecla, _roca);
     _roca->HandleEvents();
     _nube->HandleEvents();
+
+    //GameOver Event
+            if (_jugador->getColisionado()){
+        ProfileRepository::GetInstance()->modifyProfile(_profile);
+        UI::GetInstance()->drawGameOver(_profile.getScore(), _profile.getName());
+        this->_isRunning = false;
+    }
 }
 
 void Engine::Render()

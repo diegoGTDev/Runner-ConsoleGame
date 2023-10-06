@@ -7,12 +7,16 @@
 #include<windows.h>
 void ROCA::Render(){
     gotoxy(x, y);
-    std::cout<<"    ";
+    std::cout<<"      ";
     gotoxy(x, y);
     printf("\033[31m%c%c\033[0m", 219, 220);
+    //*For Debug
     gotoxy(4, 0);
     std::cout<<"x: "<<x<<" y: "<<y<<"       ";
-    gotoxy(4, 0);
+    gotoxy(60, 0);
+    std::cout<<"MIN_X: "<<MIN_X_MARCO;
+    std::cout<<" MAX_X: "<<MAX_X_MARCO;
+    //**End for debug
 
 }
 

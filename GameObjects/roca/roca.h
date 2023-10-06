@@ -8,7 +8,7 @@ class ROCA{
     ROCA(int _x, int _y){
       x = _x;
       y = _y;
-      inicialX = MAX_X_MARCO;
+      inicialX = _x;
       inicialY = _y;
 
     }
@@ -20,7 +20,7 @@ class ROCA{
     int getX();
     int getY();
     private:
-      int velocity = 2;
+      int velocity = 3;
       int x, y;
       int inicialX, inicialY;
       void estaEnLimite();

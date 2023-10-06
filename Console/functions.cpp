@@ -19,7 +19,9 @@ void imprimir(int x, int y, char w){
     Sleep(_TIME);
 }
 
-
+int isOdd(int n){
+    return n%2;
+}
 
 void gotoxy(int x,int y)
 { HANDLE hcon;

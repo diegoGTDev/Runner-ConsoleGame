@@ -16,10 +16,11 @@ class JUGADOR{
         }
         void HandleEvents(char tecla, ROCA* roca);
         void Render();
-        void Update(Profile profile);
+        void Update(Profile& profile);
         void mover();
         void saltar();
         void caer();
+        inline int getColisionado(){return colisionado;};
         int colision(struct ROCA &ROCA);
         void GameOver();
         int getPunteo();
