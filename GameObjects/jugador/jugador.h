@@ -3,7 +3,7 @@ class ROCA;
 class Profile;
 class JUGADOR{
     int x, y;
-    int dy;
+    double dy;
     int punteo = 0;
     char* nombre;
     bool estaEnElAire = false;

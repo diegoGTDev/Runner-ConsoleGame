@@ -4,10 +4,13 @@
 #include <iostream>
 #include "../../General/constantes.h"
 #include <windows.h>
+#include<math.h>
 #include<conio.h>
 #include"../../Console/UserInterface/UI.h"
 #include"../../Profile_System/ProfileRepository/ProfileRepository.h"
 #include"../../Profile_System/Profile/Profile.h"
+
+#include<windows.h>
 
 void JUGADOR::Render(){
     char* jugador[2] = {"|","O"};
@@ -45,9 +48,12 @@ void JUGADOR::caer(){
             gotoxy(x,y-k);
             std::cout << " ";
         }
-        y += dy;
+        y += round(dy);
+        //Debug 
+        //** Sleep(1000);
+        //End for debug
         //Render();
-        dy += 1;
+        dy += 0.30;
         if (y >= NIVEL_TIERRA){
             y = NIVEL_TIERRA;
             dy = 0;
@@ -65,7 +71,7 @@ void JUGADOR::caer(){
 
 void JUGADOR::saltar(){
     if (!estaEnElAire){      
-        dy = -3;
+        dy = -2;
         estaEnElAire = true;
     }
 }
