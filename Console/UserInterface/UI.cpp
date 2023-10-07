@@ -74,13 +74,13 @@ start:
         drawHighestScores();
         break;
     case '3':
-        gotoxy(_max_x_marco / 2, _max_y_marco / 2);
+        gotoxy(_max_x_marco / 2-15, _max_y_marco / 2);
         cout << "Las instrucciones del juego son las siguientes";
-        gotoxy(_max_x_marco / 2, _max_y_marco / 2 + 1);
+        gotoxy(_max_x_marco / 2-15, _max_y_marco / 2 + 1);
         cout << "Presione la tecla 'SPACE' para saltar y esquivar los obstaculos.";
-        gotoxy(_max_x_marco / 2, _max_y_marco / 2 + 2);
+        gotoxy(_max_x_marco / 2-15, _max_y_marco / 2 + 2);
         cout << "Si el jugador choca contra un obstaculo, pierde.";
-        gotoxy(_max_x_marco / 2, _max_y_marco / 2 + 3);
+        gotoxy(_max_x_marco / 2-15, _max_y_marco / 2 + 3);
         cout << "Presione la tecla 'ESC' para salir del juego.";
         break;
     case '4':

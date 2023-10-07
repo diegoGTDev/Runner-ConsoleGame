@@ -39,10 +39,10 @@ bool Engine::Init()
 
 void Engine::Update(double elapsedSeconds)
 {
-    UI::GetInstance()->drawScore(_profile.getScore());
     _roca->Update(elapsedSeconds);   
     _nube->Update();
     _jugador->Update(_profile);
+    UI::GetInstance()->drawScore(_profile.getScore());
 
 }
 
