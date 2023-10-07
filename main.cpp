@@ -22,8 +22,10 @@ int main()
         auto current = std::chrono::system_clock::now();                   // Tiempo inicial
         std::chrono::duration<double> elapsedSeconds = current - lastTime; // Duracion
         Engine::GetInstance()->HandleEvents();
-        Engine::GetInstance()->Update(elapsedSeconds.count());
-        Engine::GetInstance()->Render();
+        if (Engine::GetInstance()->isRunning()){
+            Engine::GetInstance()->Update(elapsedSeconds.count());
+            Engine::GetInstance()->Render();
+        }
         lastTime = current; // Tiempo final
     }
     Engine::GetInstance()->Release();

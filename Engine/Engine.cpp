@@ -67,7 +67,7 @@ void Engine::HandleEvents()
     _nube->HandleEvents();
 
     //GameOver Event
-            if (_jugador->getColisionado()){
+    if (_jugador->getColisionado()){
         ProfileRepository::GetInstance()->modifyProfile(_profile);
         UI::GetInstance()->drawGameOver(_profile.getScore(), _profile.getName());
         this->_isRunning = false;

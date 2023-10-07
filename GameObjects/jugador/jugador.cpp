@@ -56,7 +56,7 @@ void JUGADOR::caer(){
             gotoxy(x,y-k);
             std::cout << " ";
         }         
-            Render();
+            // Render();
         }
     }
 

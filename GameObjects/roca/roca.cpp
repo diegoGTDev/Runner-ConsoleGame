@@ -42,7 +42,8 @@ int ROCA::getY()
 }
 void ROCA::estaEnLimite(){
     const int limite = MIN_X_MARCO;
-    if (x+velocity >=limite && x<= limite){
+    //Si 20 es 
+    if (x >=limite && x <= limite){
         gotoxy(x, y);
         std::cout<<"   ";
         x = inicialX;
