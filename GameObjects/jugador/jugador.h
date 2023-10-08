@@ -1,4 +1,6 @@
 #pragma once
+#include<vector>
+class IObstacle;
 class ROCA;
 class Profile;
 class JUGADOR{
@@ -14,14 +16,14 @@ class JUGADOR{
             y = _y;
             NIVEL_TIERRA = _y;
         }
-        void HandleEvents(char tecla, ROCA* roca);
+        void HandleEvents(char tecla, std::vector<IObstacle*> &obstacles);
         void Render();
         void Update(Profile& profile);
         void mover();
         void saltar();
         void caer();
         inline int getColisionado(){return colisionado;};
-        int colision(struct ROCA &ROCA);
+        int colision(IObstacle &obs);
         void GameOver();
         int getPunteo();
         int setPunteo(int punteo);

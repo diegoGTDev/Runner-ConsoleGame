@@ -9,6 +9,8 @@
 #include"../../Console/UserInterface/UI.h"
 #include"../../Profile_System/ProfileRepository/ProfileRepository.h"
 #include"../../Profile_System/Profile/Profile.h"
+#include<vector>
+#include"../Obstacle/IObstacle.h"
 
 #include<windows.h>
 
@@ -24,12 +26,17 @@ void JUGADOR::Render(){
 
 }
 
-void JUGADOR::HandleEvents(char tecla, ROCA* roca)
+void JUGADOR::HandleEvents(char tecla, std::vector<IObstacle*> &obstacles)
 {
     if (tecla == 32){
         this->saltar();
     }
-    this->colisionado = this->colision(*roca);
+    //Leer todos los obstaculos y verificar si hay colision
+    for (int i = 0; i<obstacles.size(); i++){
+        if (this->colision(*obstacles[i])){
+            this->colisionado = 1;
+        }
+    }
 }
 void JUGADOR::Update(Profile& profile){
     this->caer();
@@ -75,9 +82,9 @@ void JUGADOR::saltar(){
         estaEnElAire = true;
     }
 }
-int JUGADOR::colision(struct ROCA &ROCA){
+int JUGADOR::colision(IObstacle &obs){
     
-    if (x>= ROCA.getX() && x <= ROCA.getX() && y >= ROCA.getY() && y <= ROCA.getY()){
+    if (x>= obs.getX() && x <= obs.getX() && y >= obs.getY() && y <= obs.getY()){
         return 1;
     }
     return 0;

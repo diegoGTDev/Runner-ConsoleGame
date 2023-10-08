@@ -13,8 +13,6 @@ void maximizarConsola(){
 void imprimir(int x, int y, char w){
     const int _TIME = 0;
     gotoxy(x,y);
-    //cout<<w;
-    //Print ascii character 177
     printf("%c", w);
     Sleep(_TIME);
 }

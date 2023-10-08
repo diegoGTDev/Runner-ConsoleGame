@@ -3,9 +3,11 @@
 #define ENGINE_H
 #include"../General/constantes.h"
 #include"../Profile_System/Profile/Profile.h"
+#include<vector>
 #define CONSOLE_WIDTH MAX_X
 #define CONSOLE_HEIGHT MAX_Y
 #define TIME 15
+class IObstacle;
 class Engine
 {
 public:
@@ -23,6 +25,8 @@ private:
     static Engine* _instance;
     bool _isRunning;
     Profile _profile;
+    std::vector<IObstacle*> _obstacles;
+    
     //---
     const int _MAX_X = MAX_X;
     const int _MAX_Y = MAX_Y;

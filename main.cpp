@@ -10,11 +10,12 @@
 #include "Engine/Engine.h"
 #include <chrono>
 #include "Console/UserInterface/UI.h"
+#include "ObstacleManager/ObstacleManager.h"
 using namespace std;
 
 int main()
 {
-    inicio:
+inicio:
     auto lastTime = chrono::system_clock::now();
     Engine::GetInstance()->Init();
     while (Engine::GetInstance()->isRunning())
@@ -22,16 +23,20 @@ int main()
         auto current = std::chrono::system_clock::now();                   // Tiempo inicial
         std::chrono::duration<double> elapsedSeconds = current - lastTime; // Duracion
         Engine::GetInstance()->HandleEvents();
-        if (Engine::GetInstance()->isRunning()){
+        if (Engine::GetInstance()->isRunning())
+        {
             Engine::GetInstance()->Update(elapsedSeconds.count());
             Engine::GetInstance()->Render();
         }
         lastTime = current; // Tiempo final
     }
-    Engine::GetInstance()->Release();
+
     if (UI::GetInstance()->drawEndMenu())
     {
+        Engine::GetInstance()->Release();
+        //ObstacleManager::GetInstance()->Release();
         goto inicio;
     }
+    Engine::GetInstance()->Release();
     return 0;
 }

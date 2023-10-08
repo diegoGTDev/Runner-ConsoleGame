@@ -121,6 +121,8 @@ int UI::drawEndMenu()
         return 1;
     case '2':
         exit(0);
+    default:
+        drawEndMenu();
     }
 }
 void UI::drawScore(int score)
