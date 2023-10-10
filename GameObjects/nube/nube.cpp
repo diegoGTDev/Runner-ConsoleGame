@@ -6,10 +6,10 @@ void NUBE::Render(){
         gotoxy(x,y+i);
         std::cout<<"             ";
     }
-     char* cloud[4] ={"   __   _",
+     char* cloud[4] ={"\033[1;36m   __   _",
                         " _(  )_( )_",
                         "(_   _    _)",
-                        "  (_) (__)"};
+                        "  (_) (__)\033[0m"};
     for (int i = 0; i < 4; i++) {
         gotoxy(x, y+i);
         std::cout<<cloud[i];

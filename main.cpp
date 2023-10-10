@@ -15,7 +15,13 @@ using namespace std;
 
 int main()
 {
-inicio:
+    
+
+    maximizarConsola();
+    system("Runner UMG");
+    system("cls");
+inicio: 
+    
     auto lastTime = chrono::system_clock::now();
     Engine::GetInstance()->Init();
     while (Engine::GetInstance()->isRunning())

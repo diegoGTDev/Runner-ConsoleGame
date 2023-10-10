@@ -8,8 +8,7 @@
 #include <windows.h>
 void ROCA::Render()
 {
-    gotoxy(x, y);
-    std::cout << "      ";
+    Release();
     gotoxy(x, y);
     printf("\033[31m%c%c\033[0m", 219, 220);
     //*For Debug
@@ -19,12 +18,14 @@ void ROCA::Render()
     // std::cout << "MIN_X: " << MIN_X_MARCO;
     // std::cout << " MAX_X: " << MAX_X_MARCO;
     //**End for debug
+    //Sleep(1000);
 }
 
 void ROCA::Update(double elapsedSeconds)
 {
 
     x -= velocity;
+    //estaEnLimite();
 }
 
 void ROCA::HandleEvents()
@@ -35,7 +36,7 @@ void ROCA::HandleEvents()
 void ROCA::Release()
 {
     gotoxy(x, y);
-    std::cout << "   ";
+    std::cout << "    ";
 }
 
 int ROCA::getX()
@@ -55,8 +56,9 @@ void ROCA::estaEnLimite()
     if (!isOdd(_max_x_marco)){
         limite -= 1;
     }
-    if (x >= limite && x <= limite)
+    if (x >= limite && x <= limite || x <= limite)
     {
+        Sleep(500);
         _inLimit = 1;
         // gotoxy(x, y);
         // std::cout << "   ";

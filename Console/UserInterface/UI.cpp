@@ -150,8 +150,8 @@ Profile UI::drawProfileRegister()
     fflush(stdin);
     profile.setName(tempName);
     ProfileRepository::GetInstance()->addProfile(profile);
-    gotoxy(x / 2 - 5, y / 2 + 2);
-    std::cout << "Presione ENTER para continuar";
+    gotoxy(x / 2 - 2, y / 2 + 4);
+    std::cout << "\033[1;33mSTART GAME\033[0m";
     getch();
     return profile;
 }

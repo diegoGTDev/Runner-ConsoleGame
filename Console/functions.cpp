@@ -11,10 +11,8 @@ void maximizarConsola(){
 
 //Funcion para imprimir el margen
 void imprimir(int x, int y, char w){
-    const int _TIME = 0;
     gotoxy(x,y);
     printf("%c", w);
-    Sleep(_TIME);
 }
 
 int isOdd(int n){

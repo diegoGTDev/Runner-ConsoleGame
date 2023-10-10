@@ -19,6 +19,7 @@ class JUGADOR{
         void HandleEvents(char tecla, std::vector<IObstacle*> &obstacles);
         void Render();
         void Update(Profile& profile);
+        void Release();
         void mover();
         void saltar();
         void caer();

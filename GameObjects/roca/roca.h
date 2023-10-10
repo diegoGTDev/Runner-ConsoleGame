@@ -5,7 +5,6 @@
 #include "../Obstacle/IObstacle.h"
 class ROCA : public IObstacle{ 
   public:
-    
     ROCA(int _x, int _y){
       x = _x;
       y = _y;
@@ -21,6 +20,7 @@ class ROCA : public IObstacle{
 
     int getX() override;
     int getY();
+    int getId() {return _id;};
     inline int isInLimit() { return _inLimit; };
     private:
       int velocity = 2;
@@ -28,6 +28,7 @@ class ROCA : public IObstacle{
       int inicialX, inicialY;
       int _inLimit = 0;
       void estaEnLimite();
+      int _id = 0;
       
 
 };
