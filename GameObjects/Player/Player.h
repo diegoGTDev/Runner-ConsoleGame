@@ -1,9 +1,9 @@
 #pragma once
 #include<vector>
 class IObstacle;
-class ROCA;
+class Rock;
 class Profile;
-class JUGADOR{
+class Player{
     int x, y;
     double dy;
     int punteo = 0;
@@ -11,7 +11,7 @@ class JUGADOR{
     bool estaEnElAire = false;
     int NIVEL_TIERRA;
     public:
-        JUGADOR(int _x, int _y){
+        Player(int _x, int _y){
             x = _x;
             y = _y;
             NIVEL_TIERRA = _y;
@@ -20,11 +20,12 @@ class JUGADOR{
         void Render();
         void Update(Profile& profile);
         void Release();
-        void mover();
-        void saltar();
-        void caer();
+        void jump();
+        void moveRight();
+        void moveLeft();
+        void fall();
         inline int getColisionado(){return colisionado;};
-        int colision(IObstacle &obs);
+        int collides(IObstacle &obs);
         void GameOver();
         int getPunteo();
         int setPunteo(int punteo);

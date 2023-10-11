@@ -38,8 +38,6 @@ class ObstacleManager{
         static void DeleteAllObstacles();
         static void HandleEvents();
         static std::vector<IObstacle*> GetObstacles();
-        static void SetGap(int gap);
-        static int GetGap();
         static void newGap();
         static void ObstacleGenerator(double elapsedSeconds);
 };

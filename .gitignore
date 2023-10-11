@@ -13,3 +13,9 @@
 
 #omitir archivo rutas
 rutas.txt
+
+#omitir archivo .dat
+*.dat
+
+#Omitir archivo rutas .txt
+rutas.txt

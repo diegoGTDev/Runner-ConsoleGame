@@ -6,7 +6,7 @@
 #include <cmath>
 // Fordebug
 #include <windows.h>
-void ROCA::Render()
+void Rock::Render()
 {
     Release();
     gotoxy(x, y);
@@ -21,34 +21,34 @@ void ROCA::Render()
     //Sleep(1000);
 }
 
-void ROCA::Update(double elapsedSeconds)
+void Rock::Update(double elapsedSeconds)
 {
 
     x -= velocity;
     //estaEnLimite();
 }
 
-void ROCA::HandleEvents()
+void Rock::HandleEvents()
 {
     estaEnLimite();
 }
 
-void ROCA::Release()
+void Rock::Release()
 {
     gotoxy(x, y);
     std::cout << "    ";
 }
 
-int ROCA::getX()
+int Rock::getX()
 {
     return x;
 }
 
-int ROCA::getY()
+int Rock::getY()
 {
     return y;
 }
-void ROCA::estaEnLimite()
+void Rock::estaEnLimite()
 {
     int limite = MIN_X_MARCO;
     const int _max_x_marco = MAX_X_MARCO - 1;
@@ -56,9 +56,9 @@ void ROCA::estaEnLimite()
     if (!isOdd(_max_x_marco)){
         limite -= 1;
     }
-    if (x >= limite && x <= limite || x <= limite)
+    if (x >= limite && x <= limite)
     {
-        Sleep(500);
+        //Sleep(500);
         _inLimit = 1;
         // gotoxy(x, y);
         // std::cout << "   ";

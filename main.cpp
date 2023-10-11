@@ -5,7 +5,7 @@
 #include <stdlib.h>
 #include "GameObjects/roca/roca.h"
 #include "GameObjects/nube/nube.h"
-#include "GameObjects/jugador/jugador.h"
+#include "GameObjects/Player/Player.h"
 #include <windows.h>
 #include "Engine/Engine.h"
 #include <chrono>

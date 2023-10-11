@@ -11,9 +11,13 @@ public:
     virtual int getY() = 0;
     virtual int getId() = 0;
     virtual inline int isInLimit() { return _inLimit; };
-
+    virtual inline int getObstacleSize() { return _obstacle_size; };
+    virtual inline int getInitialX() { return initialX; };
 private:
     int _inLimit = 0;
     int x, y;
     int _id;
+    int velocity;
+    int _obstacle_size;
+    int initialX, initialY;
 };

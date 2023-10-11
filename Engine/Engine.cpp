@@ -1,5 +1,5 @@
 #include "Engine.h"
-#include "../GameObjects/jugador/jugador.h"
+#include "../GameObjects/Player/Player.h"
 #include<windows.h>
 #include<iostream>
 #include<conio.h>
@@ -14,7 +14,7 @@
 #include"../GameObjects/Obstacle/IObstacle.h"
 using namespace std;
 Engine* Engine::_instance = nullptr;
-JUGADOR *_jugador;
+Player *_player;
 NUBE * _nube;
 bool Engine::Init()
 {
@@ -31,9 +31,9 @@ bool Engine::Init()
     // _profile.setScore(1000);
     //**End for debug
     int xPosPlayer = (isOdd(_MAX_X_MARCO-1)) ? _MIN_X_MARCO + 29  : _MIN_X_MARCO + 30;
-    //_roca = new ROCA(_MAX_X_MARCO-1, _MAX_Y_MARCO);
-    //_jugador = new JUGADOR (_MAX_X_MARCO-4, _MAX_Y_MARCO); 
-    _jugador = new JUGADOR (xPosPlayer, _MAX_Y_MARCO); 
+    //_roca = new Rock(_MAX_X_MARCO-1, _MAX_Y_MARCO);
+    // _player = new Player (_MAX_X_MARCO-4, _MAX_Y_MARCO); 
+    _player = new Player (xPosPlayer, _MAX_Y_MARCO); 
     _nube = new NUBE(_MAX_X_MARCO-9, _MIN_Y_MARCO); 
     
     // ObstacleManager::GetInstance()->CreateRock(_MAX_X_MARCO-1, _MAX_Y_MARCO);
@@ -48,7 +48,7 @@ void Engine::Update(double elapsedSeconds)
     ObstacleManager::GetInstance()->Update(elapsedSeconds);
 
     _nube->Update();
-    _jugador->Update(_profile);
+    _player->Update(_profile);
     UI::GetInstance()->drawScore(_profile.getScore());
 
 }
@@ -57,7 +57,7 @@ void Engine::Release()
 {
     _isRunning = false;;
     ObstacleManager::GetInstance()->Release();
-    delete _jugador;
+    delete _player;
     delete _nube;
     system("cls");
 }
@@ -74,12 +74,12 @@ void Engine::HandleEvents()
         this->_isRunning = false;
     }
     fflush(stdin);
-    _jugador->HandleEvents(tecla, _obstacles);
+    _player->HandleEvents(tecla, _obstacles);
     ObstacleManager::GetInstance()->HandleEvents();
     _nube->HandleEvents();
 
     //GameOver Event
-    if (_jugador->getColisionado()){
+    if (_player->getColisionado()){
         ProfileRepository::GetInstance()->modifyProfile(_profile);
         UI::GetInstance()->drawGameOver(_profile.getScore(), _profile.getName());
         //this->_isRunning = false;
@@ -89,7 +89,7 @@ void Engine::HandleEvents()
 void Engine::Render()
 {
     //Render
-    _jugador->Render();
+    _player->Render();
     ObstacleManager::GetInstance()->Render();
     _nube->Render();
     Sleep(TIME);

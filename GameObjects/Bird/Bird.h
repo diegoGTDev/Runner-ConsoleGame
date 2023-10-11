@@ -16,6 +16,7 @@ public:
     int getX();
     int getY();
     int getId() {return _id;};
+    inline int getObstacleSize() override { return _obstacle_size; };
     
 
 
@@ -24,6 +25,7 @@ private:
     int _inLimit = 0;
     int velocity = 1;
     int _id = 1;
+    int _obstacle_size = 5;
 };
 
 #endif

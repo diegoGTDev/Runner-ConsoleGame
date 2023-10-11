@@ -29,7 +29,7 @@ int ObstacleManager::_limitOfObstacles = 0;
  */
 void ObstacleManager::CreateRock(int x, int y)
 {
-    ROCA *obs = new ROCA(x, y);
+    Rock *obs = new Rock(x, y);
     obstacles.push_back(obs);
     _rocks_counter++;
 }
@@ -135,11 +135,19 @@ void ObstacleManager::DeleteObstacle(int index)
     obstacles.erase(obstacles.begin() + index);
 }
 
+/**
+ * Sets the current time of the obstacle manager.
+ * @param currentTime The current time to set.
+ */
 inline void ObstacleManager::setCurrentTime(int currentTime)
 {
     _currentTime = currentTime;
 }
 
+/**
+ * @brief Deletes all obstacles from the obstacles vector.
+ * 
+ */
 void ObstacleManager::DeleteAllObstacles()
 {
     obstacles.clear();
@@ -156,21 +164,29 @@ void ObstacleManager::DeleteAllObstacles()
  */
 void ObstacleManager::HandleEvents()
 {
-
     gotoxy(30, 1);
     if (obstacles.size() != 0){
-
-    std::cout<<"firstX: "<<obstacles[0]->getX()<<"  ";
+        std::cout<<"firstX: "<<obstacles[0]->getX()<<"  ";
     }
+
     if (obstacles.size() == 0)
     {
         return;
     }
-    for (int i = 0; i < obstacles.size(); i++)
+
+    int i = 0;
+    while (i < obstacles.size())
     {
         obstacles[i]->HandleEvents();
         if (obstacles[i]->isInLimit())
         {
+            if (obstacles[i]->getId() == 0){
+                gotoxy(30, 4);
+                std::cout<<"InitialX was: "<<obstacles[i]->getInitialX()<<"  ";
+            }
+            gotoxy(30, 5);
+            std::cout<<"Is in limit exec in obstacle with id: "<<obstacles[i]->getId()<<" ";
+            Sleep(200);
             obstacles[i]->Release();
             if (obstacles[i]->getId() == 1)
             {
@@ -182,18 +198,18 @@ void ObstacleManager::HandleEvents()
             }
             DeleteObstacle(i);
         }
+        else
+        {
+            i++;
+        }
     }
+
     if (obstacles.size() != 0)
     {
-
-        // Crear una busqueda dentro de obstacles del ultimo obstaculo tipo ROCA
-        //  y asignarle el valor de su posicion en x a _last_obs_x_rock
-
         for (int i = 0; i < obstacles.size(); i++)
         {
             if (obstacles[i]->getId() == 0)
             {
-
                 _last_obs_x_rock = obstacles[i]->getX();
             }
             else
@@ -203,19 +219,16 @@ void ObstacleManager::HandleEvents()
         }
     }
 }
-
+/**
+ * Returns a vector containing all the obstacles managed by this ObstacleManager.
+ *
+ * @return A vector containing pointers to all the obstacles.
+ */
 std::vector<IObstacle *> ObstacleManager::GetObstacles()
 {
     return obstacles;
 }
 
-void ObstacleManager::SetGap(int gap)
-{
-}
-
-int ObstacleManager::GetGap()
-{
-}
 
 void ObstacleManager::ObstacleGenerator(double elapsedSeconds)
 {
@@ -231,7 +244,13 @@ void ObstacleManager::ObstacleGenerator(double elapsedSeconds)
     int x = _max_x_marco - 1;
     if (obstacles.size() != _limitOfObstacles)
     {
+        //! Use for debug
+        // if (_rocks_counter == 0 && _birds_counter == 0 && int(_currentTime) <= 5){
 
+        //     CreateBird(14, _max_y_marco - 5);
+        //     CreateRock(23, _max_y_marco);
+        // }
+        //!End use for debug
         if (_rocks_counter == 0)
         {
 
@@ -241,13 +260,13 @@ void ObstacleManager::ObstacleGenerator(double elapsedSeconds)
 
         if (_birds_counter == 0)
         {
-            if ((int(_currentTime) >= 15 && (int(_currentTime) % 5) == 0) && _birds_counter <= _max_birds)
+            if ((int(_currentTime) >= 1 && (int(_currentTime) % 5) == 0) && _birds_counter <= _max_birds)
             {
                 CreateBird(x - 5, _max_y_marco - 5);
                 isCreated = true;
             }
         }
-        if (obstacles.size() >= 1)
+        if (obstacles.size() >= 1 && obstacles.size() != _limitOfObstacles)
         {
 
             if ((int(_currentTime) % 5 == 0) && (_birds_counter <= _max_birds) && (_max_x_marco - _last_obs_x_bird >= _gap[_gapIndex]) && (_max_x_marco - _last_obs_x_bird <= _gap[_gapIndex] + 2))
@@ -271,10 +290,15 @@ void ObstacleManager::ObstacleGenerator(double elapsedSeconds)
     }
 }
 
+/**
+ * Creates a new gap in the obstacle manager.
+ * If the gap index is at the end of the gap array, it resets to 0.
+ * Otherwise, it increments the gap index by 1.
+ */
 void ObstacleManager::newGap()
 {
     // Sleep(1000);
-    if (_gapIndex >= sizeof(_gap) / sizeof(_gap[0]) - 1)
+    if (_gapIndex > sizeof(_gap) / sizeof(_gap[0]) - 1)
     {
         _gapIndex = 0;
         // Sleep(1000);
