@@ -21,22 +21,13 @@ bool Engine::Init()
     //Init
     ocultarCursor();
     ObstacleManager::GetInstance()->Init();
-    UI::GetInstance()->drawMenu();
     _profile = UI::GetInstance()->drawProfileRegister();
     system("cls");
     UI::GetInstance()->drawFrame(4, 2, _MAX_X, _MAX_Y);
     UI::GetInstance()->drawPlayerName(_profile);
-    //*For debug
-    // _profile.setName("Jugador");
-    // _profile.setScore(1000);
-    //**End for debug
     int xPosPlayer = (isOdd(_MAX_X_MARCO-1)) ? _MIN_X_MARCO + 29  : _MIN_X_MARCO + 30;
-    //_roca = new Rock(_MAX_X_MARCO-1, _MAX_Y_MARCO);
-    // _player = new Player (_MAX_X_MARCO-4, _MAX_Y_MARCO); 
     _player = new Player (xPosPlayer, _MAX_Y_MARCO); 
     _nube = new NUBE(_MAX_X_MARCO-9, _MIN_Y_MARCO); 
-    
-    // ObstacleManager::GetInstance()->CreateRock(_MAX_X_MARCO-1, _MAX_Y_MARCO);
     return _isRunning=true;
 }
 
@@ -44,18 +35,17 @@ void Engine::Update(double elapsedSeconds)
 {
     
     ObstacleManager::GetInstance()->ObstacleGenerator(elapsedSeconds); // Genera obstáculos aleatorios
-    //_roca->Update(elapsedSeconds);   
     ObstacleManager::GetInstance()->Update(elapsedSeconds);
 
     _nube->Update();
     _player->Update(_profile);
-    UI::GetInstance()->drawScore(_profile.getScore());
+    UI::GetInstance()->drawScore(_profile);
 
 }
 
 void Engine::Release()
 {
-    _isRunning = false;;
+    _isRunning = false;
     ObstacleManager::GetInstance()->Release();
     delete _player;
     delete _nube;
@@ -82,7 +72,7 @@ void Engine::HandleEvents()
     if (_player->getColisionado()){
         ProfileRepository::GetInstance()->modifyProfile(_profile);
         UI::GetInstance()->drawGameOver(_profile.getScore(), _profile.getName());
-        //this->_isRunning = false;
+        this->_isRunning = false;
     }
 }
 

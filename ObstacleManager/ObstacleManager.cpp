@@ -64,9 +64,7 @@ void ObstacleManager::Update(double elapsedSeconds)
  */
 void ObstacleManager::Render()
 {
-    gotoxy(70, 1);
-    std::cout << "last: " << _last_obs_x_rock << "  max: ";
-    std::cout << _max_x_marco << " size: " << obstacles.size() << "  ";
+   
     for (int i = 0; i < obstacles.size(); i++)
     {
         obstacles[i]->Render();
@@ -104,8 +102,6 @@ void ObstacleManager::Init()
  */
 void ObstacleManager::Release()
 {
-    gotoxy(70, 5);
-    std::cout << "Obstacles: " << obstacles.size();
     for (int i = 0; i < obstacles.size(); i++)
     {
         obstacles[i]->Release();
@@ -164,10 +160,6 @@ void ObstacleManager::DeleteAllObstacles()
  */
 void ObstacleManager::HandleEvents()
 {
-    gotoxy(30, 1);
-    if (obstacles.size() != 0){
-        std::cout<<"firstX: "<<obstacles[0]->getX()<<"  ";
-    }
 
     if (obstacles.size() == 0)
     {
@@ -180,13 +172,7 @@ void ObstacleManager::HandleEvents()
         obstacles[i]->HandleEvents();
         if (obstacles[i]->isInLimit())
         {
-            if (obstacles[i]->getId() == 0){
-                gotoxy(30, 4);
-                std::cout<<"InitialX was: "<<obstacles[i]->getInitialX()<<"  ";
-            }
-            gotoxy(30, 5);
-            std::cout<<"Is in limit exec in obstacle with id: "<<obstacles[i]->getId()<<" ";
-            Sleep(200);
+           
             obstacles[i]->Release();
             if (obstacles[i]->getId() == 1)
             {
@@ -233,14 +219,7 @@ std::vector<IObstacle *> ObstacleManager::GetObstacles()
 void ObstacleManager::ObstacleGenerator(double elapsedSeconds)
 {
     bool isCreated = false;
-    gotoxy(50, 1);
-    // std::cout << "Gap: " << _gap[_gapIndex] << "  ";
-    std::cout << "birds: " << _birds_counter << "  ";
-    gotoxy(50, 2);
-    std::cout << "rocks: " << _rocks_counter << "  ";
     _currentTime += elapsedSeconds;
-    gotoxy(50, 0);
-    std::cout << "time: " << int(_currentTime) << "  ";
     int x = _max_x_marco - 1;
     if (obstacles.size() != _limitOfObstacles)
     {
@@ -301,11 +280,9 @@ void ObstacleManager::newGap()
     if (_gapIndex > sizeof(_gap) / sizeof(_gap[0]) - 1)
     {
         _gapIndex = 0;
-        // Sleep(1000);
     }
     else
     {
-        // Sleep(1000);
         _gapIndex += 1;
     }
 }

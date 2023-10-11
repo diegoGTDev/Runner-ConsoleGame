@@ -15,13 +15,17 @@ using namespace std;
 
 int main()
 {
-    
 
     maximizarConsola();
     system("Runner UMG");
     system("cls");
-inicio: 
-    
+
+inicio:
+    if (UI::GetInstance()->drawMenu())
+    {
+        Engine::GetInstance()->Release();
+        return 0;
+    };
     auto lastTime = chrono::system_clock::now();
     Engine::GetInstance()->Init();
     while (Engine::GetInstance()->isRunning())
@@ -40,7 +44,7 @@ inicio:
     if (UI::GetInstance()->drawEndMenu())
     {
         Engine::GetInstance()->Release();
-        //ObstacleManager::GetInstance()->Release();
+        // ObstacleManager::GetInstance()->Release();
         goto inicio;
     }
     Engine::GetInstance()->Release();

@@ -22,8 +22,7 @@ void Player::Render(){
         std::cout << jugador[j];
         
     }
-    gotoxy(30, 0);
-    std::cout<<"x: "<<x<<" y: "<<y<<"       ";
+
 
 }
 
@@ -76,7 +75,7 @@ void Player::fall(){
         //** Sleep(1000);
         //End for debug
         //Render();
-        dy += 0.30;
+        dy += 0.9;
         if (y >= NIVEL_TIERRA){
             y = NIVEL_TIERRA;
             dy = 0;
@@ -92,7 +91,7 @@ void Player::fall(){
 
 void Player::jump(){
     if (!estaEnElAire){      
-        dy = -2;
+        dy = -4;
         estaEnElAire = true;
     }
 }
@@ -106,13 +105,6 @@ void Player::jump(){
 int Player::collides(IObstacle &obs){
     
 
-    //36 >= 36 && 36 <= 36 <= 37
-    // if ((x>= obs.getX() && x <= obs.getX() && y >= obs.getY() && y <= obs.getY() )
-    // ||(x-1>= obs.getX() && x-1 <= obs.getX() && y >= obs.getY() && y <= obs.getY() )|| 
-    // (x+2>= obs.getX()+1 && x+2 <= obs.getX()+1 && y >= obs.getY() && y <= obs.getY()) || 
-    // (x+2>= obs.getX() && x+2 <= obs.getX() && y >= obs.getY() && y <= obs.getY() )){
-    //     return 1;
-    // }
 
     if (
     

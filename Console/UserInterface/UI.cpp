@@ -45,7 +45,7 @@ void UI::drawFrame(int x, int y, int max_x, int max_y)
     return;
 }
 
-void UI::drawMenu()
+int UI::drawMenu()
 {
 start:
     cleanAndDrawFrame();
@@ -65,15 +65,17 @@ start:
     cout << "Ingrese una opcion: ";
     option = getch();
     fflush(stdin);
-    cleanAndDrawFrame();
+   
     switch (option)
     {
     case '1':
-        return;
+        cleanAndDrawFrame();
+        return 0;
     case '2':
         drawHighestScores();
         break;
     case '3':
+     cleanAndDrawFrame();
         gotoxy(_max_x_marco / 2-15, _max_y_marco / 2);
         cout << "Las instrucciones del juego son las siguientes";
         gotoxy(_max_x_marco / 2-15, _max_y_marco / 2 + 1);
@@ -84,7 +86,7 @@ start:
         cout << "Presione la tecla 'ESC' para salir del juego.";
         break;
     case '4':
-        exit(0);
+        return 1;
     }
     gotoxy(_max_x_marco / 2 - 5, _max_y_marco / 2 + 6);
     std::cout << "Presione ENTER para continuar";
@@ -120,20 +122,20 @@ int UI::drawEndMenu()
     case '1':
         return 1;
     case '2':
-        exit(0);
+        return 0;
     default:
         drawEndMenu();
     }
 }
-void UI::drawScore(int score)
+void UI::drawScore(Profile &profile)
 {
-    gotoxy(4, 1);
-    std::cout << "Score: " << std::to_string(score);
+    gotoxy(15+strlen(profile.getName()), 1);
+    std::cout << "Score: " << std::to_string(profile.getScore());
 }
 
 void UI::drawPlayerName(Profile profile)
 {
-    gotoxy(4, 0);
+    gotoxy(4, 1);
     std::cout << "Player: " << profile.getName();
 }
 Profile UI::drawProfileRegister()

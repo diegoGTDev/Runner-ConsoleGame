@@ -44,8 +44,6 @@ void Bird::Update(double elapsedSeconds)
 void Bird::DetectLimit(){
     int limite = MIN_X_MARCO;
     const int _max_x_marco = MAX_X_MARCO - 1;
-    gotoxy(70, 0);
-    std::cout<<"bird x: "<<_x<<"  ";
     if (!isOdd(_max_x_marco)){
         limite -= 1;
     }
