@@ -19,6 +19,11 @@ NUBE * _nube;
 bool Engine::Init()
 {
     //Init
+    _MAX_X = MAX_X;
+    _MAX_Y = MAX_Y;
+    _MIN_X_MARCO = MIN_X_MARCO;
+    _MAX_X_MARCO = MAX_X_MARCO;
+    _MIN_Y_MARCO = MIN_Y_MARCO;
     ocultarCursor();
     ObstacleManager::GetInstance()->Init();
     _profile = UI::GetInstance()->drawProfileRegister();

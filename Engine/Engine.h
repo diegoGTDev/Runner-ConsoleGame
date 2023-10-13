@@ -28,12 +28,12 @@ private:
     std::vector<IObstacle*> _obstacles;
     
     //---
-    const int _MAX_X = MAX_X;
-    const int _MAX_Y = MAX_Y;
-    const int _MAX_X_MARCO = MAX_X_MARCO;
-    const int _MAX_Y_MARCO = MAX_Y_MARCO;
-    const int _MIN_X_MARCO = MIN_X_MARCO;
-    const int _MIN_Y_MARCO = MIN_Y_MARCO;
+    int _MAX_X = MAX_X;
+    int _MAX_Y = MAX_Y;
+    int _MAX_X_MARCO = MAX_X_MARCO;
+    int _MAX_Y_MARCO = MAX_Y_MARCO;
+    int _MIN_X_MARCO = MIN_X_MARCO;
+    int _MIN_Y_MARCO = MIN_Y_MARCO;
 };
 
 

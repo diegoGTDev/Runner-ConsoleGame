@@ -103,6 +103,15 @@ start:
     goto start;
 }
 
+void UI::Init()
+{
+    _max_x = MAX_X;
+    _max_y = MAX_Y;
+    _max_x_marco = MAX_X_MARCO;
+    _max_y_marco = MAX_Y_MARCO;
+
+}
+
 void UI::drawGameOver(int score, char *name)
 {
     int x = MAX_X_MARCO;

@@ -8,6 +8,7 @@ class UI{
     };
         void drawFrame(int x, int y, int max_x, int max_y);
         int drawMenu();
+        void Init();
         void drawGameOver(int score, char* name);
         void drawPlayerName(Profile profile);
         void drawScore(Profile &profile);
