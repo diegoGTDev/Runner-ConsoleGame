@@ -84,8 +84,10 @@ start:
         gotoxy(_max_x_marco / 2 -20, _max_y_marco / 2 + 1);
         cout << "Presione la tecla 'SPACE' para saltar y esquivar los obstaculos.";
         gotoxy(_max_x_marco / 2 -20, _max_y_marco / 2 + 2);
-        cout << "Si el jugador choca contra un obstaculo, pierde.";
+        cout << "Use las teclas A y D para mover al jugador";
         gotoxy(_max_x_marco / 2 -20, _max_y_marco / 2 + 3);
+        cout << "Si el jugador choca contra un obstaculo, pierde.";
+        gotoxy(_max_x_marco / 2 -20, _max_y_marco / 2 + 4);
         cout << "Presione la tecla 'ESC' para salir del juego.";
         isValid = true;
         break;

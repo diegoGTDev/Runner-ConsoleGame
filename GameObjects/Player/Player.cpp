@@ -33,11 +33,11 @@ void Player::HandleEvents(char tecla, std::vector<IObstacle *> &obstacles, int m
     {
         this->jump();
     }
-    else if (tecla == 65 && x > min_x_marco)
+    else if (tecla == 65 || tecla == 97 && x > min_x_marco)
     {
         this->moveLeft();
     }
-    else if (tecla == 68 && x < max_x_marco -1)
+    else if (tecla == 68 || tecla == 100 && x < max_x_marco -1)
     {
         this->moveRight();
     }
