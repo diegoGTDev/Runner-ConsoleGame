@@ -186,9 +186,6 @@ void UI::drawHighestScores()
     {
         gotoxy(x / 2 - 2, y / 2);
         std::cout << "No hay puntuaciones";
-        gotoxy(x / 2 - 5, y / 2 + 1);
-        std::cout << "Presione ENTER para continuar";
-        getch();
         return;
     }
     for (int i = 0; i < profiles.size(); i++)
