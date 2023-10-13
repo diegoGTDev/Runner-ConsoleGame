@@ -29,9 +29,9 @@ int ObstacleManager::_limitOfObstacles = 0;
  */
 void ObstacleManager::CreateRock(int x, int y)
 {
-    Rock *obs = new Rock(x, y);
-    obstacles.push_back(obs);
-    _rocks_counter++;
+    // Rock *obs = new Rock(x, y);
+    // obstacles.push_back(obs);
+    // _rocks_counter++;
 }
 /**
  * Creates a new Bird obstacle at the specified position and adds it to the list of obstacles.
@@ -41,9 +41,9 @@ void ObstacleManager::CreateRock(int x, int y)
  */
 void ObstacleManager::CreateBird(int x, int y)
 {
-    Bird *obs = new Bird(x, y);
-    obstacles.push_back(obs);
-    _birds_counter++;
+    // Bird *obs = new Bird(x, y);
+    // obstacles.push_back(obs);
+    // _birds_counter++;
 }
 /**
  * @brief Updates all obstacles in the manager.

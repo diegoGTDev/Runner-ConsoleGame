@@ -64,7 +64,7 @@ void Engine::HandleEvents()
         this->_isRunning = false;
     }
     fflush(stdin);
-    _player->HandleEvents(tecla, _obstacles);
+    _player->HandleEvents(tecla, _obstacles, _MIN_X_MARCO, _MAX_X_MARCO);
     ObstacleManager::GetInstance()->HandleEvents();
     _nube->HandleEvents();
 

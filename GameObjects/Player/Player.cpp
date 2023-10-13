@@ -27,20 +27,21 @@ void Player::Render()
     // std::cout<<"Jugador x: "<<x<<" y: "<<y<<" ";
 }
 
-void Player::HandleEvents(char tecla, std::vector<IObstacle *> &obstacles)
+void Player::HandleEvents(char tecla, std::vector<IObstacle *> &obstacles, int min_x_marco, int max_x_marco)
 {
     if (tecla == 32)
     {
         this->jump();
     }
-    else if (tecla == 65)
+    else if (tecla == 65 && x > min_x_marco)
     {
         this->moveLeft();
     }
-    else if (tecla == 68)
+    else if (tecla == 68 && x < max_x_marco -1)
     {
         this->moveRight();
     }
+
     // Read all the obstacles and check if  collides with the player.
     for (int i = 0; i < obstacles.size(); i++)
     {

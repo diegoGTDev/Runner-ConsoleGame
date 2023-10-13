@@ -16,7 +16,7 @@ class Player{
             y = _y;
             NIVEL_TIERRA = _y;
         }
-        void HandleEvents(char tecla, std::vector<IObstacle*> &obstacles);
+        void HandleEvents(char tecla, std::vector<IObstacle*> &obstacles, int min_x_marcom, int max_x_marco);
         void Render();
         void Update(Profile& profile);
         void Release();
