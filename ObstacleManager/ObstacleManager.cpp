@@ -243,7 +243,7 @@ void ObstacleManager::ObstacleGenerator(double elapsedSeconds)
         if (_birds_counter == 0)
         {
             
-            if ((int(_currentTime) >= 15 && (int(_currentTime) % 5) == 0) && _birds_counter <= _max_birds)
+            if ((int(_currentTime) >= 5 && (int(_currentTime) % 5) == 0) && _birds_counter <= _max_birds)
             {
                 
                 CreateBird(x - 5, _max_y_marco - 5);
