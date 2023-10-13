@@ -44,7 +44,6 @@ inicio:
     if (UI::GetInstance()->drawEndMenu())
     {
         Engine::GetInstance()->Release();
-        // ObstacleManager::GetInstance()->Release();
         goto inicio;
     }
     Engine::GetInstance()->Release();

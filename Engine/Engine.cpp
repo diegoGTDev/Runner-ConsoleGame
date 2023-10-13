@@ -74,6 +74,7 @@ void Engine::HandleEvents()
         UI::GetInstance()->drawGameOver(_profile.getScore(), _profile.getName());
         this->_isRunning = false;
     }
+
 }
 
 void Engine::Render()

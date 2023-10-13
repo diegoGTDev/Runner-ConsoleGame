@@ -2,7 +2,7 @@
 #include<string.h>
 class Profile{
     private:
-        char name[50];
+        char name[10];
         int score = 0;
     public:
         Profile(){}

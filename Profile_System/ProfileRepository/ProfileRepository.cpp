@@ -16,7 +16,7 @@ void ProfileRepository::addProfile(Profile profile){
 vector<Profile> ProfileRepository::getProfiles(){
     return ProfileRepository::GetInstance()->_collection; 
 }
-Profile ProfileRepository::getProfile(char name[30]){
+Profile ProfileRepository::getProfile(char name[10]){
     return FileManager::GetInstance()->obtenerObjeto(name);
 }
 void ProfileRepository::deleteProfile(Profile profile){

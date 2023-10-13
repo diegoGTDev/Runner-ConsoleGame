@@ -11,6 +11,8 @@ void Bird::Render()
         gotoxy(_x+j,_y);
         std::cout << bird[j];
     }
+    // gotoxy(60, 0);
+    // std::cout<<"bird x: "<<_x<<" y: "<<_y<<" ";
 }
 
 void Bird::HandleEvents()
@@ -38,7 +40,7 @@ int Bird::getY()
 
 void Bird::Update(double elapsedSeconds)
 {
-    _x -= velocity;
+   _x -= velocity;
 }
 
 void Bird::DetectLimit(){

@@ -79,6 +79,7 @@ void ObstacleManager::Render()
  */
 void ObstacleManager::Init()
 {
+    _currentTime = 0;
     _max_x_marco = MAX_X_MARCO;
     _max_y_marco = MAX_Y_MARCO;
 
@@ -216,20 +217,22 @@ std::vector<IObstacle *> ObstacleManager::GetObstacles()
 }
 
 
+/**
+ * @brief Generates obstacles based on the elapsed time and the current state of the game.
+ * 
+ * @param elapsedSeconds In game time elapsed.
+ */
 void ObstacleManager::ObstacleGenerator(double elapsedSeconds)
 {
     bool isCreated = false;
     _currentTime += elapsedSeconds;
+    //!Debug
+    // gotoxy(40, 1);
+    // std::cout << "Current Time: " << _currentTime;
+    //!End for debug
     int x = _max_x_marco - 1;
     if (obstacles.size() != _limitOfObstacles)
     {
-        //! Use for debug
-        // if (_rocks_counter == 0 && _birds_counter == 0 && int(_currentTime) <= 5){
-
-        //     CreateBird(14, _max_y_marco - 5);
-        //     CreateRock(23, _max_y_marco);
-        // }
-        //!End use for debug
         if (_rocks_counter == 0)
         {
 
@@ -239,8 +242,10 @@ void ObstacleManager::ObstacleGenerator(double elapsedSeconds)
 
         if (_birds_counter == 0)
         {
-            if ((int(_currentTime) >= 1 && (int(_currentTime) % 5) == 0) && _birds_counter <= _max_birds)
+            
+            if ((int(_currentTime) >= 15 && (int(_currentTime) % 5) == 0) && _birds_counter <= _max_birds)
             {
+                
                 CreateBird(x - 5, _max_y_marco - 5);
                 isCreated = true;
             }
