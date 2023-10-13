@@ -137,13 +137,13 @@ int UI::drawEndMenu()
 void UI::drawScore(Profile &profile)
 {
     gotoxy(15 + strlen(profile.getName()), 1);
-    std::cout << "Score: " << std::to_string(profile.getScore());
+    std::cout << "\033[1;32mScore: \033[0m" << std::to_string(profile.getScore());
 }
 
 void UI::drawPlayerName(Profile profile)
 {
     gotoxy(4, 1);
-    std::cout << "Player: " << profile.getName();
+    std::cout << "\033[1;33mPlayer: \033[0m" << profile.getName();
 }
 Profile UI::drawProfileRegister()
 {
