@@ -19,7 +19,7 @@ vector<Profile> FileManager::leerTodo(){
     cerrar();
     return result;
 }
-Profile FileManager::obtenerObjeto(char name[30]){
+Profile FileManager::obtenerObjeto(char name[11]){
     archivo = fopen(nombre_archivo, "rb");
     Profile registro;
     while(fread(&registro, sizeof(Profile), 1, archivo))
@@ -43,7 +43,7 @@ bool FileManager::existeArchivo()
     return true;
 }
 
-int FileManager::existeObjeto(char name[30])
+int FileManager::existeObjeto(char name[11])
 {
     archivo = fopen(nombre_archivo, "rb");
     Profile registro;

@@ -28,7 +28,7 @@ public:
     void modificarCFG(int registro);
     vector<Profile> leerTodo();
     Profile leer();
-    Profile obtenerObjeto(char name[30]);
+    Profile obtenerObjeto(char name[11]);
     int existeObjeto(char name[30]);
     bool existeArchivo();
     FILE *getArchivo();

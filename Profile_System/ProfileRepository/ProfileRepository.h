@@ -10,7 +10,7 @@ class ProfileRepository{
         }
         static void addProfile(Profile profile);
         static vector<Profile> getProfiles();
-        static Profile getProfile(char name[30]);
+        static Profile getProfile(char name[11]);
         static void deleteProfile(Profile profile);
         static vector<Profile> _collection;
         static void modifyProfile(Profile profile);

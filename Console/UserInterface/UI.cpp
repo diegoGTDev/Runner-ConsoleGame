@@ -164,18 +164,20 @@ Profile UI::drawProfileRegister()
     gotoxy(x / 2 - 5, y / 2);
     std::cout << "REGISTRO DE PERFIL";
     gotoxy(x / 2 - 5, y / 2 + 1);
-    char tempName[10];
+    char tempName[11];
     std::cout << "Nombre: ";
     std::cin.getline(tempName, 30);
+    fflush(stdin);
     //*Validation
     if (strlen(tempName) > 10 || strlen(tempName) == 0){
         gotoxy(x / 2 - 5, y / 2 + 2);
-        std::cout << "El nombre no puede tener mas de 10 caracteres y no puede estar vacio";
+        std::cout << "El nombre no puede tener mas de 10 ";
+        gotoxy(x / 2 - 5, y / 2 + 3);
+        std::cout<<"caracteres y no puede estar vacio";
         Sleep(1000);
         cleanAndDrawFrame();
         return drawProfileRegister();
     }
-    fflush(stdin);
     profile.setName(tempName);
     ProfileRepository::GetInstance()->addProfile(profile);
     gotoxy(x / 2 - 2, y / 2 + 4);
