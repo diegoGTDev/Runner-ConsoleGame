@@ -18,3 +18,5 @@
 
 - Manejo de eventos de cada objeto, todo bajo una clase Engine de una sola instancia `Singleton`.
 
+- Generación de obstáculos por medio de una clase `Obstacle Manager`.
+
