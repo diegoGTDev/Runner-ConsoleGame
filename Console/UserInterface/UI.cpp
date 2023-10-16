@@ -164,9 +164,9 @@ Profile UI::drawProfileRegister()
     gotoxy(x / 2 - 5, y / 2);
     std::cout << "REGISTRO DE PERFIL";
     gotoxy(x / 2 - 5, y / 2 + 1);
-    char tempName[11];
+    char tempName[100];
     std::cout << "Nombre: ";
-    std::cin.getline(tempName, 30);
+    std::cin.getline(tempName, 100);
     fflush(stdin);
     //*Validation
     if (strlen(tempName) > 10 || strlen(tempName) == 0){
