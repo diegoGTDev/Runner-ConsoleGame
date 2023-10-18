@@ -5,6 +5,12 @@
 #include "../GameObjects/Obstacle/IObstacle.h"
 #include<stdlib.h>
 #include "../General/constantes.h"
+enum Difficulty{
+    EASY = 1,
+    MEDIUM = 2,
+    HARD = 3
+};
+
 class ObstacleManager{
     private:
         static ObstacleManager* _instance;
@@ -22,10 +28,12 @@ class ObstacleManager{
         static int _rocks_counter;
         static double _currentTime;
         static int _limitOfObstacles;
+        static Difficulty _difficulty;
     public:
         static ObstacleManager* GetInstance(){
             return _instance = (_instance != nullptr) ? _instance : new ObstacleManager();
         }
+        static void setDifficulty(Difficulty difficulty);
         static void CreateRock(int x, int y);
         static void CreateBird(int x, int y);
         static void Init();
@@ -40,4 +48,6 @@ class ObstacleManager{
         static std::vector<IObstacle*> GetObstacles();
         static void newGap();
         static void ObstacleGenerator(double elapsedSeconds);
+        static void updateLastX();
 };
+

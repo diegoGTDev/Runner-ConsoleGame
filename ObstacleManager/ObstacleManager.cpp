@@ -6,14 +6,16 @@
 #include <windows.h>
 #include <random>
 #include <typeinfo>
+
 ObstacleManager *ObstacleManager::_instance = nullptr;
 std::vector<IObstacle *> ObstacleManager::obstacles;
 int ObstacleManager::_max_x_marco = MAX_X_MARCO;
 int ObstacleManager::_max_y_marco = MAX_Y_MARCO;
-int ObstacleManager::_gap[22] = {19, 23, 32, 21, 23, 40, 31, 32, 77, 22, 43, 50, 25, 16, 30, 20, 35, 40, 21, 64, 17, 33};
+int ObstacleManager::_gap[22] = {34, 23, 32, 21, 23, 40, 31, 32, 77, 22, 43, 50, 25, 24, 30, 20, 35, 40, 21, 64, 28, 33};
 int ObstacleManager::_gapIndex = 0;
 int ObstacleManager::_max_birds = 0;
 int ObstacleManager::_max_rocks = 0;
+Difficulty ObstacleManager::_difficulty = MEDIUM;
 int ObstacleManager::_rocks_counter = 0;
 int ObstacleManager::_birds_counter = 0;
 int ObstacleManager::_last_obs_x_rock = 0;
@@ -56,6 +58,9 @@ void ObstacleManager::Update(double elapsedSeconds)
     {
         obstacles[i]->Update(elapsedSeconds);
     }
+    
+
+    
 }
 
 /**
@@ -64,7 +69,7 @@ void ObstacleManager::Update(double elapsedSeconds)
  */
 void ObstacleManager::Render()
 {
-   
+
     for (int i = 0; i < obstacles.size(); i++)
     {
         obstacles[i]->Render();
@@ -83,18 +88,61 @@ void ObstacleManager::Init()
     _max_x_marco = MAX_X_MARCO;
     _max_y_marco = MAX_Y_MARCO;
 
-    if (_max_x_marco >= 130)
+    // Default difficulty
+    if (_difficulty == MEDIUM)
     {
-        _max_birds = 3;
-        _max_rocks = 6;
-        _limitOfObstacles = 9;
+
+        setDifficulty(MEDIUM);
     }
-    else
+    // gotoxy(40, 1);
+    // std::cout << "Current difficulty: " << _difficulty;
+    // _limitOfObstacles = _max_birds + _max_rocks;
+}
+
+void ObstacleManager::setDifficulty(Difficulty difficulty)
+{
+    _difficulty = difficulty;
+    if (difficulty == EASY)
     {
-        _max_rocks = 4;
-        _max_birds = 2;
-        _limitOfObstacles = 6;
+        _difficulty = EASY;
+        if (_max_x_marco >= 130)
+        {
+            _max_birds = 1;
+            _max_rocks = 3;
+        }
+        else
+        {
+            _max_rocks = 1;
+            _max_birds = 2;
+        }
     }
+    else if (difficulty == MEDIUM)
+    {
+        if (_max_x_marco >= 130)
+        {
+            _max_birds = 2;
+            _max_rocks = 4;
+        }
+        else
+        {
+            _max_rocks = 3;
+            _max_birds = 2;
+        }
+    }
+    else if (difficulty == HARD)
+    {
+        if (_max_x_marco >= 130)
+        {
+            _max_birds = 4;
+            _max_rocks = 6;
+        }
+        else
+        {
+            _max_rocks = 5;
+            _max_birds = 3;
+        }
+    }
+    _limitOfObstacles = _max_birds + _max_rocks;
 }
 
 /**
@@ -123,7 +171,7 @@ void ObstacleManager::Release()
 
 /**
  * @brief Deletes an obstacle from the obstacles vector and frees its memory.
- * 
+ *
  * @param index The index of the obstacle to be deleted.
  */
 void ObstacleManager::DeleteObstacle(int index)
@@ -143,7 +191,7 @@ inline void ObstacleManager::setCurrentTime(int currentTime)
 
 /**
  * @brief Deletes all obstacles from the obstacles vector.
- * 
+ *
  */
 void ObstacleManager::DeleteAllObstacles()
 {
@@ -152,11 +200,11 @@ void ObstacleManager::DeleteAllObstacles()
 
 /**
  * @brief Handles events for all obstacles in the ObstacleManager.
- * 
+ *
  * This function iterates through all obstacles in the ObstacleManager and calls their HandleEvents() function.
  * If an obstacle is out of the screen limits, it is released and removed from the ObstacleManager.
  * Additionally, it updates the _last_obs_x_rock and _last_obs_x_bird variables with the x position of the last rock and bird obstacles, respectively.
- * 
+ *
  * @return void
  */
 void ObstacleManager::HandleEvents()
@@ -173,7 +221,7 @@ void ObstacleManager::HandleEvents()
         obstacles[i]->HandleEvents();
         if (obstacles[i]->isInLimit())
         {
-           
+
             obstacles[i]->Release();
             if (obstacles[i]->getId() == 1)
             {
@@ -191,6 +239,93 @@ void ObstacleManager::HandleEvents()
         }
     }
 
+
+}
+/**
+ * Returns a vector containing all the obstacles managed by this ObstacleManager.
+ *
+ * @return A vector containing pointers to all the obstacles.
+ */
+std::vector<IObstacle *> ObstacleManager::GetObstacles()
+{
+    return obstacles;
+}
+
+/**
+ * @brief Generates obstacles based on the elapsed time and the current state of the game.
+ *
+ * @param elapsedSeconds In game time elapsed.
+ */
+void ObstacleManager::ObstacleGenerator(double elapsedSeconds)
+{
+    bool isCreated = false;
+    int differenceRock;
+    int differenceBird;
+    _currentTime += elapsedSeconds;
+    //! Debug
+    // gotoxy(40, 1);
+    // std::cout << "Current Time: " << _currentTime;
+    //    gotoxy(40, 0);
+    // std::cout << "gap: " << _gap[_gapIndex];
+    // gotoxy(70, 0);
+    // std::cout << "rocks: " << _rocks_counter;
+    // gotoxy(70, 1);
+    // std::cout << "marco: " <<_max_x_marco ;
+    //! End for debug
+    int x = _max_x_marco - 1;
+    if (obstacles.size() < _limitOfObstacles)
+    {
+        if (_rocks_counter == 0)
+        {
+
+            CreateRock(x - 2, _max_y_marco);
+            isCreated = true;
+        }
+
+        if (_birds_counter == 0)
+        {
+
+            if ((int(_currentTime) >= 5 && (int(_currentTime) % 5) == 0) && _birds_counter <= _max_birds)
+            {
+
+                CreateBird(x - 5, _max_y_marco - 5);
+                isCreated = true;
+            }
+        }
+        if (obstacles.size() >= 1 && obstacles.size() < _limitOfObstacles)
+        {
+            updateLastX();
+            differenceRock = _max_x_marco - _last_obs_x_rock;
+            differenceBird = _max_x_marco - _last_obs_x_bird;
+            if ((int(_currentTime) % 5 == 0 && _currentTime >= 5) && (_birds_counter < _max_birds) && (differenceBird >= _gap[_gapIndex]) && (differenceBird <= _gap[_gapIndex] + 2))
+            {
+                CreateBird(x - 5, _max_y_marco - 5);
+                isCreated = true;
+            }
+            else if ((differenceRock >= _gap[_gapIndex] && differenceRock <= _gap[_gapIndex] + 2) && _rocks_counter < _max_rocks && _last_obs_x_rock <= _max_x_marco - 6 )
+            {
+    //              gotoxy(40, 1);
+    // std::cout << "last obs x_rock: " << _last_obs_x_rock<<"   ";
+
+    //             gotoxy(40, 2);
+    //             std::cout<<"diff: "<<differenceRock<<"  ";
+    //             gotoxy(40, 3);
+    //             std::cout<<"gapActual: "<<_gap[_gapIndex];
+    //             Sleep(500);
+
+                CreateRock(x - 2, _max_y_marco);
+                isCreated = true;
+            }
+        }
+        if (isCreated)
+        {
+            newGap();
+        }
+    }
+}
+
+void ObstacleManager::updateLastX()
+{
     if (obstacles.size() != 0)
     {
         for (int i = 0; i < obstacles.size(); i++)
@@ -203,73 +338,6 @@ void ObstacleManager::HandleEvents()
             {
                 _last_obs_x_bird = obstacles[i]->getX();
             }
-        }
-    }
-}
-/**
- * Returns a vector containing all the obstacles managed by this ObstacleManager.
- *
- * @return A vector containing pointers to all the obstacles.
- */
-std::vector<IObstacle *> ObstacleManager::GetObstacles()
-{
-    return obstacles;
-}
-
-
-/**
- * @brief Generates obstacles based on the elapsed time and the current state of the game.
- * 
- * @param elapsedSeconds In game time elapsed.
- */
-void ObstacleManager::ObstacleGenerator(double elapsedSeconds)
-{
-    bool isCreated = false;
-    _currentTime += elapsedSeconds;
-    //!Debug
-    // gotoxy(40, 1);
-    // std::cout << "Current Time: " << _currentTime;
-    //!End for debug
-    int x = _max_x_marco - 1;
-    if (obstacles.size() != _limitOfObstacles)
-    {
-        if (_rocks_counter == 0)
-        {
-
-            CreateRock(x - 2, _max_y_marco);
-            isCreated = true;
-        }
-
-        if (_birds_counter == 0)
-        {
-            
-            if ((int(_currentTime) >= 5 && (int(_currentTime) % 5) == 0) && _birds_counter <= _max_birds)
-            {
-                
-                CreateBird(x - 5, _max_y_marco - 5);
-                isCreated = true;
-            }
-        }
-        if (obstacles.size() >= 1 && obstacles.size() != _limitOfObstacles)
-        {
-
-            if ((int(_currentTime) % 5 == 0) && (_birds_counter <= _max_birds) && (_max_x_marco - _last_obs_x_bird >= _gap[_gapIndex]) && (_max_x_marco - _last_obs_x_bird <= _gap[_gapIndex] + 2))
-            {
-                CreateBird(x - 5, _max_y_marco - 5);
-                isCreated = true;
-            }
-            else if (_max_x_marco - _last_obs_x_rock >= _gap[_gapIndex] && _max_x_marco - _last_obs_x_rock <= _gap[_gapIndex] + 2 && _rocks_counter < _max_rocks)
-            {
-
-                // Sleep(1000);
-
-                CreateRock(x - 2, _max_y_marco);
-                isCreated = true;
-            }
-        }
-        if (isCreated)
-        {
-            newGap();
         }
     }
 }

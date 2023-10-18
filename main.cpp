@@ -28,7 +28,7 @@ inicio:
     };
     auto lastTime = chrono::system_clock::now();
     Engine::GetInstance()->Init();
-    UI::GetInstance()->Init();
+    UI::GetInstance()->Init();  
     while (Engine::GetInstance()->isRunning())
     {
         auto current = std::chrono::system_clock::now();                   // Tiempo inicial

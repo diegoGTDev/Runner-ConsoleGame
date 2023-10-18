@@ -70,6 +70,7 @@ void Engine::HandleEvents()
     }
     fflush(stdin);
     _player->HandleEvents(tecla, _obstacles, _MIN_X_MARCO, _MAX_X_MARCO);
+
     ObstacleManager::GetInstance()->HandleEvents();
     _nube->HandleEvents();
 
@@ -86,6 +87,7 @@ void Engine::Render()
 {
     //Render
     _player->Render();
+
     ObstacleManager::GetInstance()->Render();
     _nube->Render();
     Sleep(TIME);

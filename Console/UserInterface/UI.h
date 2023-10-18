@@ -15,6 +15,7 @@ class UI{
         void drawStartMenu();
         void drawHighestScores();
         void cleanAndDrawFrame();
+        void drawDifficultyMenu();
         int drawEndMenu();
         Profile drawProfileRegister();
     

@@ -5,6 +5,7 @@
 #include <windows.h>
 #include <conio.h>
 #include <vector>
+#include "../../ObstacleManager/ObstacleManager.h"
 #include "../../Profile_System/ProfileRepository/ProfileRepository.h"
 UI *UI::_instance = nullptr;
 void UI::drawFrame(int x, int y, int max_x, int max_y)
@@ -56,12 +57,14 @@ start:
     gotoxy(_max_x_marco / 2, _max_y_marco / 2 + 1);
     cout << "[1] Jugar ";
     gotoxy(_max_x_marco / 2, _max_y_marco / 2 + 2);
-    cout << "[2] Ver punteos";
+    cout << "[2] Dificultad";
     gotoxy(_max_x_marco / 2, _max_y_marco / 2 + 3);
-    cout << "[3] Instrucciones";
+    cout << "[3] Ver punteos";
     gotoxy(_max_x_marco / 2, _max_y_marco / 2 + 4);
-    cout << "[4] Salir";
+    cout << "[4] Instrucciones";
     gotoxy(_max_x_marco / 2, _max_y_marco / 2 + 5);
+    cout << "[5] Salir";
+    gotoxy(_max_x_marco / 2, _max_y_marco / 2 + 6);
     cout << "Ingrese una opcion: ";
     option = getch();
     fflush(stdin);
@@ -74,10 +77,15 @@ start:
         return 0;
     case '2':
         cleanAndDrawFrame();
-        drawHighestScores();
+        drawDifficultyMenu();
         isValid = true;
         break;
     case '3':
+        cleanAndDrawFrame();
+        drawHighestScores();
+        isValid = true;
+        break;
+    case '4':
         cleanAndDrawFrame();
         gotoxy(_max_x_marco / 2 -20, _max_y_marco / 2);
         cout << "Las instrucciones del juego son las siguientes";
@@ -91,7 +99,7 @@ start:
         cout << "Presione la tecla 'ESC' para salir del juego.";
         isValid = true;
         break;
-    case '4':
+    case '5':
         return 1;
     }
     if (isValid)
@@ -233,4 +241,33 @@ void UI::cleanAndDrawFrame()
 {
     system("cls");
     drawFrame(4, 2, _max_x, _max_y);
+}
+
+void UI::drawDifficultyMenu(){
+    int x = MAX_X_MARCO;
+    int y = MAX_Y_MARCO;
+    gotoxy(x / 2 - 2, y / 2 - 1);
+    cout << "DIFICULTAD";
+    gotoxy(x / 2 - 2, y / 2);
+    cout << "1. Facil";
+    gotoxy(x / 2 - 2, y / 2 + 1);
+    cout << "2. Medio";
+    gotoxy(x / 2 - 2, y / 2 + 2);
+    cout << "3. \033[1;31mDificil\033[0m";
+    gotoxy(x / 2 - 2, y / 2 + 3);
+    cout << ">> ";
+    switch (getch())
+    {
+    case '1':
+        ObstacleManager::GetInstance()->setDifficulty(EASY);
+        return;
+    case '2':
+        ObstacleManager::GetInstance()->setDifficulty(MEDIUM);
+        return;
+    case '3':
+        ObstacleManager::GetInstance()->setDifficulty(HARD);
+        return;
+    default:
+        drawDifficultyMenu();
+    }
 }
