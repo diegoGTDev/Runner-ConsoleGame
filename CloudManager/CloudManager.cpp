@@ -70,14 +70,9 @@ void CloudManager::DeleteCloud(int index)
 void CloudManager::CloudGenerator()
 {
     int x = _max_x_marco-9;
-    int y = _min_y_marco;//_nube = new Cloud(_MAX_X_MARCO-9, _MIN_Y_MARCO); 
+    int y = _min_y_marco;
     int x_posibble_values[3] = {x-40, x-70, x-60};
-    // CreateCloud(x,y);
-    // std::cout<<"\033[1;32mX es: "<<x<<" Y es: "<<y<<"\033[0m"<<endl;
-    // Sleep(1000);
     int i = 0;
-    //std::cout<<"\033[1;32mCoudA: "<<determCloudAmount()<<" \033[0m"<<endl;
-    // Sleep(2000);
     while (i < determCloudAmount()){
         if (i == 0){
             CreateCloud(x, y);
@@ -89,7 +84,7 @@ void CloudManager::CloudGenerator()
         }
         i++;
     }
-    ocultarCursor();
+    //ocultarCursor();
 }
 
 int CloudManager::determCloudAmount()

@@ -26,8 +26,6 @@ bool Engine::Init()
     _MAX_X_MARCO = MAX_X_MARCO;
     _MIN_Y_MARCO = MIN_Y_MARCO;
     ObstacleManager::GetInstance()->Init();
-    CloudManager::GetInstance()->Init();
-    CloudManager::GetInstance()->CloudGenerator();
     _profile = UI::GetInstance()->drawProfileRegister();
     system("cls");
     UI::GetInstance()->drawFrame(4, 2, _MAX_X, _MAX_Y);
@@ -36,11 +34,13 @@ bool Engine::Init()
     _player = new Player (xPosPlayer, _MAX_Y_MARCO); 
     //_nube = new Cloud(_MAX_X_MARCO-9, _MIN_Y_MARCO); 
     //!debug
-    gotoxy(30, 0);
-    std::cout<<"x marco max: "<<_MAX_X_MARCO;
-    gotoxy(30, 1);
-    std::cout<<"y marco max: "<<_MAX_Y_MARCO;
+    // gotoxy(30, 0);
+    // std::cout<<"x marco max: "<<_MAX_X_MARCO;
+    // gotoxy(30, 1);
+    // std::cout<<"y marco max: "<<_MAX_Y_MARCO;
     //!end for debug
+    CloudManager::GetInstance()->Init();
+    CloudManager::GetInstance()->CloudGenerator();
     ocultarCursor();
     return _isRunning=true;
 }
