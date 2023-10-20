@@ -11,11 +11,12 @@
 #include"../Profile_System/ProfileRepository/ProfileRepository.h"
 #include"../ObstacleManager/ObstacleManager.h"
 #include<vector>
+#include"../CloudManager/CloudManager.h"
 #include"../GameObjects/Obstacle/IObstacle.h"
 using namespace std;
 Engine* Engine::_instance = nullptr;
 Player *_player;
-NUBE * _nube;
+//Cloud * _nube;
 bool Engine::Init()
 {
     //Init
@@ -24,25 +25,33 @@ bool Engine::Init()
     _MIN_X_MARCO = MIN_X_MARCO;
     _MAX_X_MARCO = MAX_X_MARCO;
     _MIN_Y_MARCO = MIN_Y_MARCO;
-    ocultarCursor();
     ObstacleManager::GetInstance()->Init();
+    CloudManager::GetInstance()->Init();
+    CloudManager::GetInstance()->CloudGenerator();
     _profile = UI::GetInstance()->drawProfileRegister();
     system("cls");
     UI::GetInstance()->drawFrame(4, 2, _MAX_X, _MAX_Y);
     UI::GetInstance()->drawPlayerName(_profile);
     int xPosPlayer = (isOdd(_MAX_X_MARCO-1)) ? _MIN_X_MARCO + 29  : _MIN_X_MARCO + 30;
     _player = new Player (xPosPlayer, _MAX_Y_MARCO); 
-    _nube = new NUBE(_MAX_X_MARCO-9, _MIN_Y_MARCO); 
+    //_nube = new Cloud(_MAX_X_MARCO-9, _MIN_Y_MARCO); 
+    //!debug
+    gotoxy(30, 0);
+    std::cout<<"x marco max: "<<_MAX_X_MARCO;
+    gotoxy(30, 1);
+    std::cout<<"y marco max: "<<_MAX_Y_MARCO;
+    //!end for debug
+    ocultarCursor();
     return _isRunning=true;
 }
 
 void Engine::Update(double elapsedSeconds)
 {
-    
+    CloudManager::GetInstance()->Update();
     ObstacleManager::GetInstance()->ObstacleGenerator(elapsedSeconds); // Genera obstáculos aleatorios
     ObstacleManager::GetInstance()->Update(elapsedSeconds);
 
-    _nube->Update();
+    //_nube->Update();
     _player->Update(_profile);
     UI::GetInstance()->drawScore(_profile);
 
@@ -52,14 +61,17 @@ void Engine::Release()
 {
     _isRunning = false;
     ObstacleManager::GetInstance()->Release();
+    CloudManager::GetInstance()->Release();
     delete _player;
-    delete _nube;
+    //delete _nube;
     system("cls");
 }
 
 
 void Engine::HandleEvents()
 {
+    
+    CloudManager::GetInstance()->HandleEvents();
     _obstacles = ObstacleManager::GetInstance()->GetObstacles();
     char tecla = 0;
     if (_kbhit()){
@@ -72,7 +84,7 @@ void Engine::HandleEvents()
     _player->HandleEvents(tecla, _obstacles, _MIN_X_MARCO, _MAX_X_MARCO);
 
     ObstacleManager::GetInstance()->HandleEvents();
-    _nube->HandleEvents();
+    //_nube->HandleEvents();
 
     //GameOver Event
     if (_player->getColisionado()){
@@ -87,8 +99,8 @@ void Engine::Render()
 {
     //Render
     _player->Render();
-
+    CloudManager::GetInstance()->Render();
     ObstacleManager::GetInstance()->Render();
-    _nube->Render();
+    //_nube->Render();
     Sleep(TIME);
 }
