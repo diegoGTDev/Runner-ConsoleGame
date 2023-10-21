@@ -41,7 +41,7 @@ bool Engine::Init()
     //!end for debug
     CloudManager::GetInstance()->Init();
     CloudManager::GetInstance()->CloudGenerator();
-    ocultarCursor();
+
     return _isRunning=true;
 }
 

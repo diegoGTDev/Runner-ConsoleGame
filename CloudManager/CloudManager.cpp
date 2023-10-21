@@ -84,7 +84,6 @@ void CloudManager::CloudGenerator()
         }
         i++;
     }
-    //ocultarCursor();
 }
 
 int CloudManager::determCloudAmount()

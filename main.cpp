@@ -16,6 +16,7 @@ using namespace std;
 int main()
 {
 
+    ocultarCursor();
     maximizarConsola();
     system("Runner UMG");
     system("cls");
@@ -29,7 +30,6 @@ inicio:
     auto lastTime = chrono::system_clock::now();
     Engine::GetInstance()->Init();
     UI::GetInstance()->Init();  
-    ocultarCursor();
     while (Engine::GetInstance()->isRunning())
     {
         auto current = std::chrono::system_clock::now();                   // Tiempo inicial
